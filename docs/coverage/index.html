@@ -1,0 +1,644 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.ba-throttle-debounce.min.js"></script>
+    <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="coverage_html.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(coverage.index_ready);
+    </script>
+</head>
+<body class="indexfile">
+
+<div id="header">
+    <div class="content">
+        <h1>Coverage report:
+            <span class="pc_cov">87%</span>
+        </h1>
+
+        <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
+
+        <form id="filter_container">
+            <input id="filter" type="text" value="" placeholder="filter..." />
+        </form>
+    </div>
+</div>
+
+<div class="help_panel">
+    <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
+    <p class="legend">Hot-keys on this page</p>
+    <div>
+    <p class="keyhelp">
+        <span class="key">n</span>
+        <span class="key">s</span>
+        <span class="key">m</span>
+        <span class="key">x</span>
+        
+        <span class="key">c</span> &nbsp; change column sorting
+    </p>
+    </div>
+</div>
+
+<div id="index">
+    <table class="index">
+        <thead>
+            
+            <tr class="tablehead" title="Click to sort">
+                <th class="name left headerSortDown shortkey_n">Module</th>
+                <th class="shortkey_s">statements</th>
+                <th class="shortkey_m">missing</th>
+                <th class="shortkey_x">excluded</th>
+                
+                <th class="right shortkey_c">coverage</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>3058</td>
+                <td>403</td>
+                <td>65</td>
+                
+                <td class="right" data-ratio="2655 3058">87%</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+            <tr class="file">
+                <td class="name left"><a href="filters_py.html">filters.py</a></td>
+                <td>49</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="41 49">84%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="floatdict_py.html">floatdict.py</a></td>
+                <td>80</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="80 80">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="fmt_py.html">fmt.py</a></td>
+                <td>91</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="91 91">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="geom_py.html">geom.py</a></td>
+                <td>367</td>
+                <td>159</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="208 367">57%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="shapes_py.html">shapes.py</a></td>
+                <td>91</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="91 91">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural___init___py.html">structural/__init__.py</a></td>
+                <td>18</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="18 18">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_acibars_py.html">structural/acibars.py</a></td>
+                <td>14</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="14 14">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_asce7_05_py.html">structural/asce7_05.py</a></td>
+                <td>89</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="78 89">88%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_asce7_10_py.html">structural/asce7_10.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_beamcolumn_py.html">structural/beamcolumn.py</a></td>
+                <td>131</td>
+                <td>14</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="117 131">89%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_calc_py.html">structural/calc.py</a></td>
+                <td>34</td>
+                <td>19</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="15 34">44%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_conccol_py.html">structural/conccol.py</a></td>
+                <td>136</td>
+                <td>66</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="70 136">51%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_concrete_py.html">structural/concrete.py</a></td>
+                <td>16</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 16">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_driftcalc_py.html">structural/driftcalc.py</a></td>
+                <td>13</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="11 13">85%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_embedment_py.html">structural/embedment.py</a></td>
+                <td>48</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="48 48">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_examples___init___py.html">structural/examples/__init__.py</a></td>
+                <td>9</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="3 9">33%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_footing_py.html">structural/footing.py</a></td>
+                <td>112</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="112 112">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_frame2d_py.html">structural/frame2d.py</a></td>
+                <td>262</td>
+                <td>62</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="200 262">76%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_lightpole_py.html">structural/lightpole.py</a></td>
+                <td>38</td>
+                <td>3</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="35 38">92%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_load_cases_py.html">structural/load_cases.py</a></td>
+                <td>79</td>
+                <td>0</td>
+                <td>7</td>
+                
+                <td class="right" data-ratio="79 79">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_pit_py.html">structural/pit.py</a></td>
+                <td>72</td>
+                <td>10</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="62 72">86%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_project_py.html">structural/project.py</a></td>
+                <td>59</td>
+                <td>3</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="56 59">95%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_report_py.html">structural/report.py</a></td>
+                <td>32</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="27 32">84%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_retain_py.html">structural/retain.py</a></td>
+                <td>66</td>
+                <td>29</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="37 66">56%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_roof_py.html">structural/roof.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_sign_py.html">structural/sign.py</a></td>
+                <td>17</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="17 17">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_snowcalc_py.html">structural/snowcalc.py</a></td>
+                <td>23</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 23">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_soil_py.html">structural/soil.py</a></td>
+                <td>55</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="49 55">89%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests___init___py.html">structural/tests/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_acibars_py.html">structural/tests/test_acibars.py</a></td>
+                <td>9</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="9 9">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_beamcolumn_py.html">structural/tests/test_beamcolumn.py</a></td>
+                <td>17</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="17 17">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_buildingcode_py.html">structural/tests/test_buildingcode.py</a></td>
+                <td>20</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="20 20">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_conccol_py.html">structural/tests/test_conccol.py</a></td>
+                <td>23</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="23 23">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_concrete_py.html">structural/tests/test_concrete.py</a></td>
+                <td>21</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="21 21">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_driftcalc_py.html">structural/tests/test_driftcalc.py</a></td>
+                <td>16</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="16 16">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_embedment_py.html">structural/tests/test_embedment.py</a></td>
+                <td>13</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="13 13">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_equation_py.html">structural/tests/test_equation.py</a></td>
+                <td>20</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="20 20">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_filters_py.html">structural/tests/test_filters.py</a></td>
+                <td>43</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="43 43">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_footing_py.html">structural/tests/test_footing.py</a></td>
+                <td>67</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="67 67">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_frame2d_py.html">structural/tests/test_frame2d.py</a></td>
+                <td>42</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="42 42">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_lightpole_py.html">structural/tests/test_lightpole.py</a></td>
+                <td>19</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="19 19">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_load_cases_py.html">structural/tests/test_load_cases.py</a></td>
+                <td>25</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="25 25">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_pit_py.html">structural/tests/test_pit.py</a></td>
+                <td>16</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="16 16">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_project_py.html">structural/tests/test_project.py</a></td>
+                <td>73</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="73 73">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_report_py.html">structural/tests/test_report.py</a></td>
+                <td>16</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="16 16">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_retain_py.html">structural/tests/test_retain.py</a></td>
+                <td>12</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="12 12">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_roof_py.html">structural/tests/test_roof.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_sign_py.html">structural/tests/test_sign.py</a></td>
+                <td>13</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="13 13">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_snow_py.html">structural/tests/test_snow.py</a></td>
+                <td>24</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="24 24">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_snowcalc_py.html">structural/tests/test_snowcalc.py</a></td>
+                <td>13</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="13 13">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_soil_py.html">structural/tests/test_soil.py</a></td>
+                <td>53</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="53 53">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_wind_py.html">structural/tests/test_wind.py</a></td>
+                <td>54</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="54 54">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_tests_test_windcalc_py.html">structural/tests/test_windcalc.py</a></td>
+                <td>17</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="17 17">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="structural_windcalc_py.html">structural/windcalc.py</a></td>
+                <td>19</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="19 19">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="tests___init___py.html">tests/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="tests_test_floatdict_py.html">tests/test_floatdict.py</a></td>
+                <td>56</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="56 56">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="tests_test_fmt_py.html">tests/test_fmt.py</a></td>
+                <td>69</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="69 69">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="tests_test_geom_py.html">tests/test_geom.py</a></td>
+                <td>110</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="110 110">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="tests_test_shapes_py.html">tests/test_shapes.py</a></td>
+                <td>56</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="56 56">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="tests_test_util_py.html">tests/test_util.py</a></td>
+                <td>41</td>
+                <td>0</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="41 41">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="util_py.html">util.py</a></td>
+                <td>56</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="56 56">100%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <p id="no_rows">
+        No items found using the specified filter.
+    </p>
+</div>
+
+<div id="footer">
+    <div class="content">
+        <p>
+            <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.1</a>,
+            created at 2018-10-29 16:09
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

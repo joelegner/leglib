@@ -1,0 +1,52 @@
+===============================================================================
+Project: CR Hydrated Lime Ducts                              Number: 198801275
+                                                              2018-10-29 16:09
+===============================================================================
+-------------------------------------------------------------------------------
+                WindOtherStructureCalc1 - Wind on Duct Supports                 
+-------------------------------------------------------------------------------
+Wind on Duct Supports
+Calc. by: J. Legner
+Run 2018-10-29 16:09
+
+Wind Load on Other Structure
+============================
+ASCE7-10
+
+Inputs
+    Ultimate wind speed:            Vult = 144 mph
+    Height:                         z    = 15.0 ft
+    Velocity pressure coeffient:    Kz   = 0.85
+    Topographic factor:             Kzt  = 1.00
+    Directional factor:             Kd   = 0.85
+    Gust factor:                    G    = 0.85
+
+Velocity pressure:
+    qz = 0.00256(Kz)(Kzt)(Kd)(Vult)^2 = 38.4 psf
+
+
+Constituent Areas
+-----------------
+    W6 Column: Af = 4.75, Cf = 2.00, z = 4.75 ft
+    Lower Pipe: Af = 4.43, Cf = 0.70, z = 8.00 ft
+    Upper Pipe: Af = 4.43, Cf = 0.70, z = 9.00 ft
+    Duct: Af = 15.3, Cf = 2.00, z = 11.5 ft
+    ========================================================
+    Total Af    = 28.9 sq ft
+    Total Cf*Af = 46.4 sq ft
+
+Resultant Force
+---------------
+    The following loads are factored (strength level) per ASCE 7-10. They should
+    be multiplied by 0.7 when used in allowable stress design (ASD) load
+    combinations.
+
+    Resultant force, Pu = the sum of qz*G*Cf*Af for constituent areas.
+    Resultant moment, Mu = the sum of qz*G*Cf*Af*z for constituent areas.
+    Height to resultant, h = Mu/Fu.
+
+    Factored resultant force:   Pu = 1.51 kips
+    Factored resultant moment:  Mu = 14.7 kip-ft
+    Height to resultant:        h  = 9.72 ft
+
+
