@@ -1,0 +1,21 @@
+Footing/Pier Assembly
+=====================
+Footing
+    Length,    L = {{ m.footing.L | fixed }} ft = {{ m.footing.L | ft_in }} 
+    Width,     B = {{ m.footing.B | fixed }} ft = {{ m.footing.B | ft_in }}
+    Thickness, T = {{ m.footing.T | fixed }} ft = {{ m.footing.T | ft_in }}
+    Bearing Area
+        Area            A  = {{ m.footing.A() | fixed }} ft^2
+        Section modulus Sx = {{ m.footing.Sx() | fixed }} ft^3
+        Section modulus Sy = {{ m.footing.Sy() | fixed }} ft^3
+Pier
+    Length, Lp = {{ m.pier.L | fixed }} ft = {{ m.pier.L | ft_in }} 
+    Width,  Bp = {{ m.pier.B | fixed }} ft = {{ m.pier.B | ft_in }}
+    Height, H  = {{ m.pier.T | fixed }} ft = {{ m.pier.T | ft_in }}
+Concrete density, gamma_c = {{ m.footing.gamma_c | mult(1000) | sigdig }} pcf
+Soil density, gamma_s = {{ m.soil.gamma_s | mult(1000) | sigdig }} pcf
+Footing weight, Wf = {{ m.footing.W() | sigdig }} kips
+Pier weight, Wp = {{ m.Wp() | sigdig }} kips
+Soil weight, Ws = {{ m.Ws() | sigdig }} kips
+Total foundation weight, W = Wf + Wp + Ws = {{ m.W() | sigdig }} kips
+

@@ -1,0 +1,4 @@
+{% block header %}{{ m.title }}
+{% if m.by %}Calc. by: {{m.by}}{% endif %}
+Run {{ m.timestamp() }}{% endblock header %}
+{% block body %} {% endblock %}

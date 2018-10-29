@@ -1,0 +1,35 @@
+{% extends "_base_calc.txt" %}
+{% block body %}
+Wind Load on Other Structure
+============================
+{{ m.code.asce7.name }}
+{% if m.code.asce7.name == "ASCE7-05" %}
+*ERROR - {{ m.code.asce7 }} NOT IMPLEMENTED *
+{% elif m.code.asce7.name == "ASCE7-10" %}
+{% include "includes/asce7_10_wind.txt" %}
+{% if m.areas %}
+Constituent Areas
+-----------------
+{% for a in m.areas %}    {{ a.name }}: Af = {{ a.Af|sigdig }}, Cf = {{ a.Cf|fixed }}, z = {{ a.z|distance_from_ft }}
+{% endfor %}    ========================================================
+    Total Af    = {{ m.Af|sigdig }} sq ft
+    Total Cf*Af = {{ m.CfAf|sigdig }} sq ft
+
+Resultant Force
+---------------
+    The following loads are factored (strength level) per ASCE 7-10. They should
+    be multiplied by 0.7 when used in allowable stress design (ASD) load
+    combinations.
+
+    Resultant force, Pu = the sum of qz*G*Cf*Af for constituent areas.
+    Resultant moment, Mu = the sum of qz*G*Cf*Af*z for constituent areas.
+    Height to resultant, h = Mu/Fu.
+
+    Factored resultant force:   Pu = {{ m.P|sigdig }} kips
+    Factored resultant moment:  Mu = {{ m.M|sigdig }} kip-ft
+    Height to resultant:        h  = {{ m.h|sigdig }} ft
+{% endif %}{# if m.areas #}
+{% else %}{# if m.code.asce7.name == "ASCE7-05" #}
+*ERROR - {{ m.code.asce7 }} NOT IMPLEMENTED *
+{% endif %}{# if m.code.asce7.name == "ASCE7-05" #}
+{% endblock %}{# body #}

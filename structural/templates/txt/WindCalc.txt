@@ -1,0 +1,14 @@
+{% extends "_base_calc.txt" %}
+{% block body %}
+Wind Calculation
+================
+{{ m.code.asce7.name }}
+{% if m.code.asce7.name == "ASCE7-05" %}
+*ERROR - {{ m.code.asce7 }} NOT IMPLEMENTED *
+{% elif m.code.asce7.name == "ASCE7-10" %}
+{% include "includes/asce7_10_wind.txt" %}
+{% else %}
+*ERROR - {{ m.code.asce7 }} NOT IMPLEMENTED *
+{% endif %}
+{% endblock %}
+

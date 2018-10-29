@@ -1,0 +1,12 @@
+TestFilters
+===========
+dim             {{ m.tf | dim }}
+dim             {{ m.tf | dim(m) }}
+fixed           {{ m.L | fixed }}
+ft_in           {{ m.L | ft_in(denom=4) }}
+ft_in_from_ft   {{ m.Lfeet | ft_in_from_ft }}
+length          {{ m.L | length }}
+length          {{ m.L | length(m) }}
+mult and ft_in  {{ m.Lfeet | mult(12.0) | ft_in }}
+sigdig          {{ m.tf | sigdig }}
+sigdig 4        {{ m.tf | sigdig(4) }}

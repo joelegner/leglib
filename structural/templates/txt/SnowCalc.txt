@@ -1,0 +1,26 @@
+{% extends "_base_calc.txt" %}
+{% block body %}
+Snow Calculation
+================
+Inputs
+    Ground snow load:       pg    = {{m.pg | fixed(digits=0) }} psf
+    Eave to ridge distance: W     = {{m.W | sigdig }} ft
+    Exposure factor         Ce    = {{m.Ce | fixed }}
+    Thermal factor:         Ct    = {{m.Ct | fixed }}
+    Importance factor:      I     = {{m.I | fixed }}
+    Roof rise/run:                  {{m.roof.rise | dim }} per foot 
+    Roof slope:             theta = {{m.roof.theta() | sigdig }} degrees
+    Roof surface:                   {% if m.roof.slippery %}Slippery{% else
+    %}Non-slippery{% endif %}
+
+Flat roof snow load:
+    pf = 0.7(Ce)(Ct)(pg)(I) {% if m.pg > 20.0 %}>= 20I psf{% else %}>= pg(I) psf)
+{% endif %}{# m.pg > 20 #} = {{m.pf | sigdig }} psf
+
+
+Sloped roof snow load:
+    Cs          = {{m.Cs | fixed }} per ASCE 7-05 Figure 6-3
+    ps = Cs(pf) = {{m.pf | sigdig }} psf
+
+{% endblock %}
+

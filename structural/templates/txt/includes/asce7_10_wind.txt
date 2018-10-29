@@ -1,0 +1,11 @@
+Inputs
+    Ultimate wind speed:            Vult = {{m.V | fixed(digits=0) }} mph
+    Height:                         z    = {{m.z | sigdig }} ft
+    Velocity pressure coeffient:    Kz   = {{m.Kz | fixed(digits=2) }}
+    Topographic factor:             Kzt  = {{m.Kzt | fixed(digits=2) }}
+    Directional factor:             Kd   = {{m.Kd | fixed(digits=2) }}
+    Gust factor:                    G    = {{m.G | fixed(digits=2) }}
+
+Velocity pressure:
+    qz = 0.00256(Kz)(Kzt)(Kd)(Vult)^2 = {{m.qz|sigdig}} psf
+

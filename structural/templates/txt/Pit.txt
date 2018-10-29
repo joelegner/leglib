@@ -1,0 +1,69 @@
+Footing/Pier Assembly
+=====================
+Material Densities
+    Water density,              gamma_w   = {{ m.gamma_w | sigdig }} pcf
+    Concrete density,           gamma_c   = {{ m.concrete.gamma_c | sigdig }} pcf
+    Dry soil density,           gamma_s   = {{ m.soil.gamma_s | sigdig }} pcf
+    Saturated soil density,     gamma_sat = {{ m.soil.gamma_sat | sigdig }} pcf
+    Allowable bearing pressure, Qa        = {{ m.soil.Qa | sigdig }} psf
+Grade and Water Table
+    Height from grade to top of pit wall, Hg = {{ m.Hg | fixed }} ft = {{ m.Hg | ft_in_from_ft}}
+    Depth from grade to water table, dwt = {{ m.dwt | fixed }} ft = {{ m.dwt |
+    ft_in_from_ft }}
+Pit
+    Depth from grade to bottom of pit, dp = {{ m.dp | fixed }} ft = {{ m.dp | ft_in_from_ft }}
+    Inside length,  Lp      = {{m.Lp | fixed }} ft = {{m.Lp | ft_in_from_ft }}
+    Inside width,   Bp      = {{m.Bp | fixed }} ft = {{m.Bp | ft_in_from_ft }}
+    Pit wall thickness, tp  = {{m.tp | fixed }} in
+    Outside length, Lpo     = {{m.Lpo | fixed }} ft = {{m.Lpo | ft_in_from_ft }}
+    Outside width,  Bpo     = {{m.Bpo | fixed }} ft = {{m.Bpo | ft_in_from_ft }}
+    Height of pit walls, Hp = dp + Hg = {{m.Hp | fixed }} ft = {{ m.Hp | ft_in_from_ft }}
+Foundation Mat
+    Length,     Lf   = {{ m.Lf | fixed }} ft = {{ m.Lf | ft_in_from_ft }} 
+    Width,      Bf   = {{ m.Bf | fixed }} ft = {{ m.Bf | ft_in_from_ft }}
+    Thickness,  tf   = {{ m.tf | fixed }} in = {{ m.tf | ft_in }}
+    Area,       A    = {{ m.A | sigdig }} ft^2
+    Toe,        Ltoe = {{ m.Ltoe | fixed }} ft = {{ m.Ltoe | ft_in_from_ft }}
+
+Dead Loads
+----------
+Foundation Mat
+    Volume, Vf = (Lf)(Bf)(tf/12) = {{ m.Vf | sigdig }} ft^3
+    Weight, Wf = (Vf)(gamma_c) = {{ m.Wf | sigdig }} kips
+Pit Walls
+    Volume, Vp = [(Lpo)(Bpo) - (Lp)(Bp)](Hp) = {{ m.Vp | sigdig }} ft^3
+    Weight, Wp = (Vp)(gamma_c) = {{ m.Wp | sigdig }} kips
+Soil
+    Total volume, Vs = [A - (Lpo)(Bpo)](dp)       = {{ m.Vs | sigdig }} ft^3
+    Volume of dry, Vdry = [A - (Lpo)(Bpo)](dwt)   = {{ m.Vdry | sigdig }} ft^3
+    Volume of saturated, Vsat = Vs - Vdry         = {{ m.Vsat | sigdig }} ft^3
+    Weight of dry, Wdry = (Vdry)(gamma_s)         = {{ m.Wdry | sigdig }} kips
+    Weight of saturated, Wsat = (Vsat)(gamma_sat) = {{ m.Wsat | sigdig }} kips
+TOTALS:
+    Total volume of concrete, Vc = Vp + Vf        = {{ m.Vc | sigdig }} ft^3
+                                                  = {{ m.Vc | mult(1.0/27.0) | sigdig }} CY
+    Total weight of soil, Ws = Wdry + Wsat        = {{ m.Ws | sigdig }} kips
+    Total weight of concrete, Wc = Wf + Wp        = {{ m.Wc | sigdig }} kips
+    Total weight, Wtot = Wf + Wp + W              = {{ m.Wtot | sigdig }} kips
+
+Uplift / Buoyancy
+-----------------
+Normal Case:
+    High water table with soil, FSreq = {{ m.FSreq1 | fixed }} per ACI 350.4R-04
+    Section 3.1.2
+    Buoyancy force, Pup1 = (A)(dp - dwt + tf/12)(gamma_w)  = {{ m.Pup1 | sigdig }} kips
+    Factor of safety, FSsup1 = Wtot/Pup1                   = {{ m.FSup1 | fixed }}
+    Buoyancy check, Uup1 = FSreq1/FSup1                    = {{ m.Uup1 | check }}
+
+Special Case:
+    High water table without soil, FSreq = {{ m.FSreq2 | fixed }}
+    Buoyancy, Pup2 = [Vf + Lpo(Bpo)(dp - dwt)](gamma_w)    = {{ m.Pup2 | sigdig }} kips
+    Factor of safety, FSsup2 = Wc/Pup2                     = {{ m.FSup2 | fixed }}
+    Buoyancy check, Uup2 = FSreq2/FSup2                    = {{ m.Uup2 | check }}
+
+Bearing Pressure
+----------------
+Total vertical load, P = Wtot = {{ m.P | sigdig }} kips
+Bearing pressure, f = P/A = {{ m.f | sigdig }} psf
+Bearing check, Ubrg = f/Qa = {{ m.Ubrg | check }}
+
