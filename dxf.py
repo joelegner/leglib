@@ -5,33 +5,33 @@ Currently limited to 2D lines only.
 import re
 
 # List of group codes that should be string values
-STR_CODES = range(10)
+STR_CODES = list(range(10))
 STR_CODES.extend((100, 102, 105))
-STR_CODES.extend(range(300, 370))
-STR_CODES.extend(range(390, 400))
-STR_CODES.extend(range(430, 440))
-STR_CODES.extend(range(470, 480))
-STR_CODES.extend(range(1000, 1010))
+STR_CODES.extend(list(range(300, 370)))
+STR_CODES.extend(list(range(390, 400)))
+STR_CODES.extend(list(range(430, 440)))
+STR_CODES.extend(list(range(470, 480)))
+STR_CODES.extend(list(range(1000, 1010)))
 
 # List of group codes that should be integer values
-INT_CODES = range(60, 100)
-INT_CODES.extend(range(170, 180))
-INT_CODES.extend(range(270, 290))
-INT_CODES.extend(range(370, 390))
-INT_CODES.extend(range(400, 410))
-INT_CODES.extend(range(420, 430))
-INT_CODES.extend(range(440, 460))
-INT_CODES.extend(range(1060, 1073))
+INT_CODES = list(range(60, 100))
+INT_CODES.extend(list(range(170, 180)))
+INT_CODES.extend(list(range(270, 290)))
+INT_CODES.extend(list(range(370, 390)))
+INT_CODES.extend(list(range(400, 410)))
+INT_CODES.extend(list(range(420, 430)))
+INT_CODES.extend(list(range(440, 460)))
+INT_CODES.extend(list(range(1060, 1073)))
 
 # List of group codes that should be integer values
-FLOAT_CODES = range(10, 60)
-FLOAT_CODES.extend(range(110, 150))
-FLOAT_CODES.extend(range(210, 240))
-FLOAT_CODES.extend(range(460, 470))
-FLOAT_CODES.extend(range(1010, 1060))
+FLOAT_CODES = list(range(10, 60))
+FLOAT_CODES.extend(list(range(110, 150)))
+FLOAT_CODES.extend(list(range(210, 240)))
+FLOAT_CODES.extend(list(range(460, 470)))
+FLOAT_CODES.extend(list(range(1010, 1060)))
 
 # List of group codes that should be boolean values
-BOOL_CODES = range(290, 300)
+BOOL_CODES = list(range(290, 300))
 
 # Map of used group codes to entity properties
 CODES = {\
@@ -351,7 +351,7 @@ class DxfFile:
                 elif group_code in FLOAT_CODES:
                     val = float(self.lines[i])
                 else:
-                    print "Group code %d not found." % group_code
+                    print("Group code %d not found." % group_code)
                     val = None
                 self.data.append((group_code, val))
 #        for d in self.data:
@@ -382,12 +382,12 @@ class DxfFile:
 
     def read_entity(self):
         # Start reading the pairs and store as entity attributes
-        pair = self.next()
+        pair = next(self)
         ent = AcDbEntity()
         while pair[0] != 0:
             code, val = pair
             ent.__setattr__(code, val)
-            pair = self.next()
+            pair = next(self)
         self.cur_row -= 1
         return ent
 
@@ -406,7 +406,7 @@ class DxfFile:
                 # results when using new bears06.framework system
                 elif val in ENTITIES and cur_sec != "BLOCKS":
                     dwg.entities.append(self.read_entity())
-            pair = self.next()
+            pair = next(self)
         return dwg
 
 
@@ -415,7 +415,7 @@ class AcDbEntity:
         pass
 
     def __setattr__(self, code, value):
-        if code in CODES.keys():
+        if code in list(CODES.keys()):
             if value != "AcDbEntity":
                 self.__dict__[CODES[code]] = value
 
@@ -432,7 +432,7 @@ class EntityCollection(list):
         rx = re.compile(regex)
         retval = EntityCollection()
         for e in self:
-            if attr in e.__dict__.keys():
+            if attr in list(e.__dict__.keys()):
                 if rx.match(e.__dict__[attr]) is not None:
                     retval.append(e)
         return retval
@@ -442,7 +442,7 @@ class EntityCollection(list):
         "Return a list of all entities with a particular value."
         retval = EntityCollection()
         for e in self:
-            if attr in e.__dict__.keys():
+            if attr in list(e.__dict__.keys()):
                 if e.__dict__[attr] == value:
                     retval.append(e)
         return retval
@@ -460,4 +460,4 @@ def import_dxf(filename):
 
 if __name__ == "__main__":
     fname = "/home/legeng/eng/projects/0265_bethany/dwgs/grids.dxf"
-    print import_dxf(fname)
+    print(import_dxf(fname))

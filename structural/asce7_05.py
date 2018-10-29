@@ -23,7 +23,7 @@ def Kz(z, exposure="C", case=1):
         alpha = 11.5
         zg = 700.0
     else:
-        raise ValueError, "exposure %s not allowed" % exposure
+        raise ValueError("exposure %s not allowed" % exposure)
 
     if z < 15:
         retval = 2.01*((15.0/zg)**(2.0/alpha))
@@ -88,7 +88,7 @@ def Cs(roof, Ct):
             x1, y1 = 45.0, 1.0
         x2, y2 = 70.0, 0.0
     else:
-        raise ValueError, "Ct must be 1.0, 1.1 or 1.2"
+        raise ValueError("Ct must be 1.0, 1.1 or 1.2")
     return min(1.0, max(0.0, interpolate(x1, y1, x2, y2, roof.theta())))
 
 def ps(roof, pg, I=1.0, Ce=1.0, Ct=1.0):

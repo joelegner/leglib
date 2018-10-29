@@ -1,6 +1,7 @@
 "Basic 2D geometry classes and functions"
 
 import math
+from util import almost_equal
 
 #try:
 #    import pylab
@@ -40,11 +41,8 @@ class Point:
         "Informal string representation."
         return "(%s, %s)" % (self.x, self.y)
 
-    def __cmp__(self, other):
-        if self.x == other.x and self.y == other.y:
-            return 0
-        else: # try to come up with something stable
-            return cmp(id(self), id(other))
+    def __eq__(self, other):
+        return almost_equal(self.x, other.x, places=3) and almost_equal(self.y, other.y, places=3)
 
     def move(self, dx, dy):
         self.x += dx
@@ -86,7 +84,7 @@ class Point:
         elif item == 1:
             return self.y
         else:
-            raise IndexError, "Point index out of range (0 or 1 only)."
+            raise IndexError("Point index out of range (0 or 1 only).")
 
     def copy(self, dir_vec):
         return Point(self.x + dir_vec[0], self.y + dir_vec[1])
@@ -187,7 +185,7 @@ class Line:
         else:
             off_brg = brg - math.pi/2.0
 
-        print "offset bearing =", off_brg
+        print(("offset bearing =", off_brg))
         self.pt1.x = round(self.pt1.x + dist*math.cos(off_brg), 6)
         self.pt1.y += dist*math.sin(off_brg)
         self.pt2.x = round(self.pt2.x + dist*math.cos(off_brg), 6)
@@ -483,20 +481,20 @@ class Polygon:
         pts.append(self.points[0])
 
         for i in range(0, len(self.points)):
-            print "Point %d = %s" % (i, pts[i + 1])
+            print(("Point %d = %s" % (i, pts[i + 1])))
             x1, y1 = pts[i + 1].x, pts[i + 1].y
             x2, y2 = pts[i].x, pts[i].y
             x3, y3 = pts[i + 2].x, pts[i + 2].y
             left_ln = Line(Point(x1, y1), Point(x2, y2))
             right_ln = Line(Point(x1, y1), Point(x3, y3))
-            print "\tLeft line before offset: %s" % left_ln
-            print "\tRight line before offset: %s" % right_ln
+            print(("\tLeft line before offset: %s" % left_ln))
+            print(("\tRight line before offset: %s" % right_ln))
             left_ln.offset_left(1.0)
-            print "\tLeft line after offset: %s" % left_ln
-            print "\tRight line after offset: %s" % right_ln
+            print(("\tLeft line after offset: %s" % left_ln))
+            print(("\tRight line after offset: %s" % right_ln))
             right_ln.offset_right(1.0)
-            print "\tLeft line after offset: %s" % left_ln
-            print "\tRight line after offset: %s" % right_ln
+            print(("\tLeft line after offset: %s" % left_ln))
+            print(("\tRight line after offset: %s" % right_ln))
             inter = left_ln.intersection(right_ln)
             self.points[i].x = inter.x
             self.points[i].y = inter.y
@@ -504,7 +502,7 @@ class Polygon:
     def get_segments(self):
         "Returns a list of all line segments."
         for i in range(0, len(self.points)):
-            print i
+            print(i)
 
 class Rectangle:
     def __init__(self, pt1, pt2):
@@ -567,10 +565,10 @@ class Vector:
         self.y = float(y)
 
     def __unicode__(self):
-        return u"Vector(%s, %s)" % (self.x, self.y)
+        return "Vector(%s, %s)" % (self.x, self.y)
 
     def __str__(self):
-        return self.__unicode__().encode("utf-8")
+        return self.__unicode__()
 
     def norm(self):
         "Returns the length of the vector."
@@ -590,7 +588,7 @@ class Vector:
         if isinstance(other, Vector):
             return Vector(self.x + other.x, self.y + other.y)
         else:
-            raise TypeError, "Vector addition requires vector addend."
+            raise TypeError("Vector addition requires vector addend.")
 
     def __mul__(self, other):
         "Vector to scalar multiplication."
@@ -601,14 +599,14 @@ class Vector:
         if isinstance(other, Vector):
             return self.x * other.x + self.y * other.y
         else:
-            raise TypeError, "Vector dot product requires vector argument."
+            raise TypeError("Vector dot product requires vector argument.")
 
     def cross(self, other):
         "Vector cross product."
         if isinstance(other, Vector):
             return (self.x * other.y) - (self.y * other.x)
         else:
-            raise TypeError, "Vector dot product requires vector argument."
+            raise TypeError("Vector dot product requires vector argument.")
 
     def perp(self):
         "Returns perpendicular vector."

@@ -14,7 +14,7 @@ class TestFilters(unittest.TestCase):
     def test_imperial_filters(self):
         r = Report(self)
         # It should return a unicode string
-        self.assertEqual(type(r.render("txt")), type(u"Joe"))
+        self.assertEqual(type(r.render("txt")), type("Joe"))
         # The string should not be empty
         self.assertGreater(len(r.render("txt")), 0)
         # Test various filters
@@ -35,7 +35,7 @@ class TestFilters(unittest.TestCase):
         self.project = Project(is_metric = True)
         r = Report(self)
         # It should return a unicode string
-        self.assertEqual(type(r.render("txt")), type(u"Joe"))
+        self.assertEqual(type(r.render("txt")), type("Joe"))
         # The string should not be empty
         self.assertGreater(len(r.render("txt")), 0)
         # Test various filters that are affected by is_metric

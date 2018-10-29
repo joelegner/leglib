@@ -52,6 +52,11 @@ class Node(geom.Point):
         "Returns true if no boundary conditions"
         return not self.is_support()
 
+    def __lt__(self, other):
+        "Compare for sorting"
+        return (self.x, self.y) < (other.x, other.y)
+
+
     def __cmp__(self, other):
         "Compare for sorting"
         return cmp((self.x, self.y), (other.x, other.y))
@@ -90,7 +95,7 @@ class Node(geom.Point):
 
     def dofs(self):
         "Returns list of local degrees of freedom"
-        return range(0, DOF_PER_JOINT)
+        return list(range(0, DOF_PER_JOINT))
 
     def DoFs(self):
         "Returns global degrees of freedom corresponding to local ones."
@@ -215,7 +220,7 @@ class FrameMember(geom.Segment):
 
     def dofs(self):
         "Returns degrees of freedom for the member."
-        return range(0, DOF_PER_JOINT*2)
+        return list(range(0, DOF_PER_JOINT*2))
 
     def DoFs(self):
         "Returns global degrees of freedom for the member."
@@ -279,25 +284,25 @@ class Frame2D:
         return retval
 
     def add_pin(self, i):
-        if i in self.nodes.keys():
+        if i in list(self.nodes.keys()):
             self.nodes[i].fixed_x = True
             self.nodes[i].fixed_y = True
             self.nodes[i].fixed_theta = False
 
     def add_roller_x(self, i):
-        if i in self.nodes.keys():
+        if i in list(self.nodes.keys()):
             self.nodes[i].fixed_x = False
             self.nodes[i].fixed_y = True
             self.nodes[i].fixed_theta = False
 
     def add_roller_y(self, i):
-        if i in self.nodes.keys():
+        if i in list(self.nodes.keys()):
             self.nodes[i].fixed_x = True
             self.nodes[i].fixed_y = False
             self.nodes[i].fixed_theta = False
 
     def fixed(self, i):
-        if i in self.nodes.keys():
+        if i in list(self.nodes.keys()):
             self.nodes[i].fixed_x = True
             self.nodes[i].fixed_y = True
             self.nodes[i].fixed_theta = True
@@ -445,12 +450,12 @@ class Frame2D:
         # Convert the reaction matrix into a list of 3-tuples:
         # (P, V, M)
         R = [r[0] for r in R.tolist()]
-        R = zip(*[R[i::3] for i in range(3)])
+        R = list(zip(*[R[i::3] for i in range(3)]))
 
         # Convert the deflection matrix into a list of 3-tuples:
         # (dx, dy, dtheta)
         U = [r[0] for r in U.tolist()]
-        U = zip(*[U[i::3] for i in range(3)])
+        U = list(zip(*[U[i::3] for i in range(3)]))
 
         return {"reactions" : R, "deflections" : U}
 

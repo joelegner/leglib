@@ -18,12 +18,12 @@ class Soil:
 
     def __unicode__(self):
         if self.name is not None:
-            return unicode(self.name)
+            return str(self.name)
         else:
             return "Soil Qa=%s" % fmt.sigdig(self.Qa)
 
     def __str__(self):
-        return unicode(self).encode('utf-8')
+        return self.__unicode__()
 
     def Ka(self, beta = 0.0, alpha = 90.0):
         alpha = math.radians(float(alpha))
@@ -69,6 +69,9 @@ class SoilStratum(Soil):
     def __init__(self, z, soil):
         self.soil = soil
         self.z = float(z)
+
+    def __lt__(self, other):
+        return self.z < other.z
 
     def __cmp__(self, other):
         if self.z < other.z:

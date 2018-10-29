@@ -10,12 +10,12 @@ class TestBasicProject(unittest.TestCase):
     def test_str_unicode(self):
         # Start without any project number
         self.assertEqual("%s" % self.p, "Test Project")
-        self.assertEqual(unicode(self.p), u"Test Project")
+        self.assertEqual(str(self.p), "Test Project")
         self.assertEqual(str(self.p), "Test Project")
         # Add a project number and re-test
         self.p.number = 889
         self.assertEqual("%s" % self.p, "889 - Test Project")
-        self.assertEqual(unicode(self.p), u"889 - Test Project")
+        self.assertEqual(str(self.p), "889 - Test Project")
         self.assertEqual(str(self.p), "889 - Test Project")
 
     def test_calc_handling(self):

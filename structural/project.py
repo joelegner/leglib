@@ -19,7 +19,7 @@ class Project(object):
             return "%s" % (self.name)
 
     def __str__(self):
-        return unicode(self).encode("utf-8")
+        return self.__unicode__()
 
     def timestamp(self):
         return util.timestamp()
@@ -27,7 +27,7 @@ class Project(object):
     def _next_name(self, class_name):
         i = 1
         candidate_name = "%s%d" % (class_name, i)
-        while candidate_name in self.calcs.keys():
+        while candidate_name in list(self.calcs.keys()):
             i = i + 1
             candidate_name = "%s%d" % (class_name, i)
         return candidate_name
@@ -71,7 +71,7 @@ class Project(object):
                 return False
         else:
             # Recalculate all
-            for calc in self.calcs.values():
+            for calc in list(self.calcs.values()):
                 self._update_calc(calc)
                 calc.recalc()
             return True

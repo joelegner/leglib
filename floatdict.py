@@ -11,32 +11,32 @@ class FloatDict(dict):
         by the amount of the float."""
         retval = FloatDict()
         if isinstance(other, dict):
-            for k in self.keys():
-                if k in other.keys():
+            for k in list(self.keys()):
+                if k in list(other.keys()):
                     retval[k] = self[k] + other[k]
                 else:
                     retval[k] = self[k]
-            for k in other.keys():
-                if k not in self.keys():
+            for k in list(other.keys()):
+                if k not in list(self.keys()):
                     retval[k] = other[k]
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k] + other
         return retval
 
     def __sub__(self, other):
         retval = FloatDict()
         if isinstance(other, dict):
-            for k in self.keys():
-                if k in other.keys():
+            for k in list(self.keys()):
+                if k in list(other.keys()):
                     retval[k] = self[k] - other[k]
                 else:
                     retval[k] = self[k]
-            for k in other.keys():
-                if k not in self.keys():
+            for k in list(other.keys()):
+                if k not in list(self.keys()):
                     retval[k] = -other[k]
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k] - other
         return retval
 
@@ -47,62 +47,62 @@ class FloatDict(dict):
         float value."""
         retval = FloatDict()
         if isinstance(other, dict):
-            for k in self.keys():
-                if k in other.keys():
+            for k in list(self.keys()):
+                if k in list(other.keys()):
                     retval[k] = self[k] * other[k]
                 else:
                     retval[k] = 0.0
-            for k in other.keys():
-                if k not in self.keys():
+            for k in list(other.keys()):
+                if k not in list(self.keys()):
                     retval[k] = 0.0
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k] * other
         return retval
 
     def __rmul__(self, other):
         retval = FloatDict()
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k] * other
         return retval
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         """Divide two FloatDicts or a FloatDict and a float.  In the former
         case, multiply each shared term.  Unshared terms result in zero in the
         result FloatDict.  For floats, each term is multiplied in turn by the
         float value."""
         retval = FloatDict()
         if isinstance(other, dict):
-            for k in self.keys():
-                if k in other.keys():
+            for k in list(self.keys()):
+                if k in list(other.keys()):
                     retval[k] = self[k]/other[k]
                 else:
                     retval[k] = None
-            for k in other.keys():
-                if k not in self.keys():
+            for k in list(other.keys()):
+                if k not in list(self.keys()):
                     retval[k] = 0.0
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k]/other
         return retval
 
-    def __rdiv__(self, other):
+    def __rtruediv__(self, other):
         """Divide two FloatDicts or a FloatDict and a float.  In the former
         case, multiply each shared term.  Unshared terms result in zero in the
         result FloatDict.  For floats, each term is multiplied in turn by the
         float value."""
         retval = FloatDict()
         if isinstance(other, dict):
-            for k in self.keys():
-                if k in other.keys():
+            for k in list(self.keys()):
+                if k in list(other.keys()):
                     retval[k] = other[k]/self[k]
                 else:
                     retval[k] = 0.0
-            for k in other.keys():
-                if k not in self.keys():
+            for k in list(other.keys()):
+                if k not in list(self.keys()):
                     retval[k] = None
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = other/self[k]
         return retval

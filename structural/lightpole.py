@@ -15,7 +15,7 @@ class LightPole(BaseCalc):
         self.G = 0.85
         self.Cf = 2.0
         if self.shape not in ("square", "hexagonal", "round"):
-            raise ValueError, "Shape type %s not valid" % self.shape
+            raise ValueError("Shape type %s not valid" % self.shape)
 
     def add_fixture(self, b, h, y):
         self.fixtures.append((b, h, y))

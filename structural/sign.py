@@ -1,4 +1,4 @@
-import asce7_05 as asce
+from . import asce7_05 as asce
 
 class Sign:
 

@@ -1,4 +1,4 @@
-from soil import SoilStratum
+from .soil import SoilStratum
 
 
 class RetainingWall:

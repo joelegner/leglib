@@ -1,6 +1,6 @@
 # Building code settings
-import asce7_05
-import asce7_10
+from .asce7_05 import *
+from .asce7_10 import *
 
 
 class BuildingCode:

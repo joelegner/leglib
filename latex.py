@@ -23,7 +23,7 @@ def sig(num, digits = DIGITS):
     """
     assert(digits >= 1)
     if not isinstance(num, float):
-        raise TypeError, "Significant digits only apply to float values."
+        raise TypeError("Significant digits only apply to float values.")
 
     if num:
         # Order of magnitude
@@ -177,15 +177,15 @@ def frac(val, denom = 64):
 if __name__ == '__main__':
     # Test
     a = 5.57437
-    print sig(a)
-    print sig(a, 10)
+    print(sig(a))
+    print(sig(a, 10))
     b = 453278943.4327819432
-    print sig(b, 4)
+    print(sig(b, 4))
     fb = 14.532
-    print psi(fb)
-    print psf(fb)
-    print ksf(fb)
-    print ksi(fb)
-    print money(b)
-    print frac(0.375)
-    print inches(0.3125)
+    print(psi(fb))
+    print(psf(fb))
+    print(ksf(fb))
+    print(ksi(fb))
+    print(money(b))
+    print(frac(0.375))
+    print(inches(0.3125))

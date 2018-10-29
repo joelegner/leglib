@@ -23,7 +23,7 @@ _counters = { }
 def _add_combo(methodology, factors):
     global _counters
     global combos
-    if methodology in _counters.keys():
+    if methodology in list(_counters.keys()):
         _counters[methodology] = _counters[methodology] + 1
     else:
         _counters[methodology] = 0
@@ -78,7 +78,7 @@ _add_combo("LRFD", [0.9, 0, 0, 0, 0, 1.6, 0, 1.6])
 _add_combo("LRFD", [0.9, 0, 0, 0, 0, 0, 1, 1.6])
 
 combo_names = { }
-for k in combos.keys():
+for k in list(combos.keys()):
     combo_names[k] = [c[0] for c in combos[k]]
 
 def calc_combos(methodology, vector):
@@ -86,7 +86,7 @@ def calc_combos(methodology, vector):
     # Determine if there are any transient loads in the vector, i.e.
     # wind (W+, W-), earthquake (E) or lateral earth pressure (H)
     if len(vector) >= 5:
-        max_transient = max(vector[4:], math.fabs(min(vector[4:])))
+        max_transient = max(max(vector[4:]), math.fabs(min(vector[4:])))
     else:
         max_transient = 0
     # Cycle through all load combinations
@@ -114,10 +114,10 @@ if __name__ == '__main__': # pragma: no cover
     # This code is used to generate documentation - do not alter
     # See docs/Makefile
     # See also docs/source/structural/loads.rst
-    print "ASD (ALLOWABLE STRESS DESIGN):"
+    print("ASD (ALLOWABLE STRESS DESIGN):")
     for c in combos["ASD"]:
-        print "%-6s: %s" % (c[0], c[1])
-    print "\nLRFD (LOAD AND RESISTANCE FACTOR DESIGN):"
+        print("%-6s: %s" % (c[0], c[1]))
+    print("\nLRFD (LOAD AND RESISTANCE FACTOR DESIGN):")
     for c in combos["LRFD"]:
-        print "%-6s: %s" % (c[0], c[1])
+        print("%-6s: %s" % (c[0], c[1]))
 

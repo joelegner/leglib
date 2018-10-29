@@ -1,5 +1,5 @@
 # Import all ASCE 7-05 and then override where necessary
-from asce7_05 import *
+from .asce7_05 import *
 
 name = "ASCE7-10"
 ASD_WIND_FACTOR = 0.6

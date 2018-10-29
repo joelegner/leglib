@@ -9,5 +9,5 @@ if __name__ == '__main__':
     for filename in os.listdir(this_path):
         fname, ext = os.path.splitext(filename)
         if ext.lower() == ".py" and fname != "__init__":
-            execfile(os.path.join(this_path, filename))
-
+            exec(open(os.path.join(this_path, filename)).read())
+            

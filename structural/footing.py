@@ -1,8 +1,8 @@
-from load_cases import calc_combos
-from load_cases import cases
-from load_cases import combos
+from .load_cases import calc_combos
+from .load_cases import cases
+from .load_cases import combos
 from shapes import RectangularPrism
-from soil import Soil
+from .soil import Soil
 import fmt
 import math
 
@@ -18,7 +18,7 @@ class RectFooting(RectangularPrism):
             fmt.ft_in(self.T*12.0))
 
     def __str__(self):
-        return unicode(self).encode('utf-8')
+        return self.__unicode__()
 
     def A(self):
         "Override area of prism to return only area of bearing surface (bottom)"
@@ -74,7 +74,7 @@ class FootingPierAssembly:
             fmt.ft_in(self.pier.B*12.0), fmt.ft_in(self.pier.T*12.0))
 
     def __str__(self):
-        return unicode(self).encode('utf-8')
+        return self.__unicode__()
 
     def is_eccentric(self):
         "Returns true if any moment on the footing"

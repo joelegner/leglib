@@ -31,7 +31,7 @@ class Report:
 
     def write(self, filename, template_type="txt", overwrite=False):
         if os.path.exists(filename) and not overwrite:
-            raise IOError, "File %s exists.  Set overwrite=True to over-write."
+            raise IOError("File %s exists.  Set overwrite=True to over-write.")
         with open(filename, "wt") as f:
             f.write(self.render(template_type))
             f.close()

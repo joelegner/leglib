@@ -6,7 +6,7 @@ import re
 # =============================================================================
 def unsigned_float(txt):
     "Returns true if string is a signed or unsigned decimal."
-    print "Validating string %s" % txt
+    print("Validating string %s" % txt)
     return (re.compile(r"^\d*\.?\d*$").search(txt) is not None)
 
 def signed_float(txt):
@@ -47,7 +47,7 @@ def even_int(val):
     return not(val%2)
 
 if __name__ == "__main__":
-    print "Testing validation functions."
+    print("Testing validation functions.")
     assert not signed_int("-4.11")      # False
     assert signed_int("-4")             # True
     assert not unsigned_int("-4")       # False
@@ -61,4 +61,4 @@ if __name__ == "__main__":
     assert not even_int("3")            # True
     assert not even_int(31)             # False
     assert not even_int(1.7)            # False
-    print "Done. No failures."
+    print("Done. No failures.")

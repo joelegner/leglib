@@ -15,7 +15,7 @@ class TestSnowCalc(unittest.TestCase):
     def test_report(self):
         r = self.calc.render("txt")
         self.assertTrue(len(r) > 0)
-        self.assertTrue(type(r) == type(u"Joe") > 0)
+        self.assertTrue(type(r) == type("Joe"))
 
 
 if __name__ == '__main__': # pragma: no cover

@@ -138,7 +138,7 @@ class TestGeom(unittest.TestCase):
         v1 = Vector(7, 4)
         v2 = Vector(-6, 3)
         self.assertEqual("%s" % v1, "Vector(7.0, 4.0)")
-        self.assertEqual(u"%s" % v2, u"Vector(-6.0, 3.0)")
+        self.assertEqual("%s" % v2, "Vector(-6.0, 3.0)")
         # length should be sqrt(7**2 + 4**2) = 8.062
         self.assertAlmostEqual(v1.norm(), 8.062, places=3)
         # Create a unit vector and test its length

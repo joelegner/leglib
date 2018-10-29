@@ -1,7 +1,7 @@
-from calc import BaseCalc
-from concrete import Concrete
-from soil import Soil
-import asce7_05 as asce
+from .calc import BaseCalc
+from .concrete import Concrete
+from .soil import Soil
+from . import asce7_05 as asce
 
 FS_REQ1 = 1.25  # Required factor of safety per ACI 350.4R-04 Section 3.1.2
 FS_REQ2 = 1.1   # Special case of flooded, empty excavation

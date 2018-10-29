@@ -1,5 +1,5 @@
-from acibars import get_bar
-from concrete import Concrete
+from .acibars import get_bar
+from .concrete import Concrete
 import math
 
 Es = 29000.0            # ksi
@@ -18,7 +18,7 @@ class BarRow:
         return "%d-%s at ds = %.2f" % (self.n, self.bar(), self.ds)
 
     def __str__(self):
-        return unicode(self).encode("utf-8")
+        return str(self).encode("utf-8")
 
     def bar(self):
         return get_bar(self.barsize)

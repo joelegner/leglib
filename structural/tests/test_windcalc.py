@@ -19,7 +19,7 @@ class TestWindCalcASCE7_10(unittest.TestCase):
         self.calc.recalc()
         r = self.calc.render("txt")
         self.assertTrue(len(r) > 0)
-        self.assertTrue(type(r) == type(u"Joe") > 0)
+        self.assertTrue(type(r) == type("Joe"))
 
 
 if __name__ == '__main__': # pragma: no cover

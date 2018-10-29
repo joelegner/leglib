@@ -1,5 +1,5 @@
 #!/bin/env python
-from footing import Footing
+from .footing import Footing
 from leglib import fmt
 from matplotlib import pyplot as plt
 from portal import PortalFrame
@@ -220,11 +220,11 @@ class PileGroup:
             aspect = aspect + ASPECT_INC
         self.cols, self.rows = min_rows_cols
         self.analyze(P=P+1.25*self.Wftg(), M=M, V=V)
-        print("Winning combination: %d rows x %d columns" % (self.rows,
-            self.cols))
-        print("Footing size = %s x %s x %s" % (fmt.ft_in(self.ftg.L*12),
-            fmt.ft_in(self.ftg.B*12), fmt.ft_in(self.ftg.T*12)))
-        print("Footing weight = %.0f kips" % self.Wftg())
+        print(("Winning combination: %d rows x %d columns" % (self.rows,
+            self.cols)))
+        print(("Footing size = %s x %s x %s" % (fmt.ft_in(self.ftg.L*12),
+            fmt.ft_in(self.ftg.B*12), fmt.ft_in(self.ftg.T*12))))
+        print(("Footing weight = %.0f kips" % self.Wftg()))
         self.plot_plan(filename="depth%.0f_plan.png" % (self.H))
         self.plot_elev(filename="depth%.0f_elev.png" % (self.H))
 
@@ -234,8 +234,8 @@ if __name__ == '__main__':
     # 3672 kip-ft.
     for H in [15.0, 30.0, 50.0]:
         print("===============================================================")
-        print("Stick height, H = %.0f ft" % H)
-        print("Design stick height, H = 1.5(H - 3) = %.1f ft" % (1.5*(H - 3.0)))
+        print(("Stick height, H = %.0f ft" % H))
+        print(("Design stick height, H = 1.5(H - 3) = %.1f ft" % (1.5*(H - 3.0))))
         grp = PileGroup(H=H)
         # Combine loads per Extreme Event II
         grp.design(P=1.25*1340 + 0.5*408, M=3672*0.5, V=2000.0)

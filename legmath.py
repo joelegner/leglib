@@ -1,6 +1,6 @@
 "leglib math routines"
 
-from util import almost_equal
+from .util import almost_equal
 import math
 
 def fabsmax(list_of_values):

@@ -3,9 +3,7 @@
 # If you add a new filter, add it to the list of imports in structural/report.py
 # Also add it to Jinja in the body of Report.render()
 
-
 import fmt
-
 
 def _is_metric(member):
     retval = False
@@ -79,9 +77,9 @@ def equation(text, namespace):
     """Substitues values from namespace in equation text:
        Given:
            M = wL^2/8
-           obj.M = 20.25
-           obj.w = 0.50
-           obj.L = 18.0
+           namespace.M = 20.25
+           namespace.w = 0.50
+           namespace.L = 18.0
        Filter output:
            M = wL^2/8 = (0.500)(18.0)^2/8 = 20.25
 
@@ -93,11 +91,15 @@ def equation(text, namespace):
     left, right = text.split('=')
     left = left.strip()
     right = right.strip()
-    for i in namespace.__dict__:
+
+    keys = [k for k in list(namespace.__dict__.keys())]
+
+    keys.sort(key=len, reverse=True)
+
+    for i in keys:
         # Prepare it so (A)(B) = C does not become ((1.00))((2.00)) = 2.00
         right = right.replace("(%s)" % i, "%s" % i)
         right = right.replace(i, "(%s)" % sigdig(getattr(namespace, i)))
     for i in namespace.__dict__:
         left = left.replace(i, "%s" % sigdig(getattr(namespace, i)))
     return " = ".join([text, right, left])
-

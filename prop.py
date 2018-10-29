@@ -18,16 +18,16 @@ class FloatDict(dict):
         by the amount of the float."""
         retval = FloatDict()
         if isinstance(other, dict):
-            for k in self.keys():
-                if k in other.keys():
+            for k in list(self.keys()):
+                if k in list(other.keys()):
                     retval[k] = self[k] + other[k]
                 else:
                     retval[k] = self[k]
-            for k in other.keys():
-                if k not in self.keys():
+            for k in list(other.keys()):
+                if k not in list(self.keys()):
                     retval[k] = other[k]
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k] + other
         return retval
 
@@ -38,23 +38,23 @@ class FloatDict(dict):
         float value."""
         retval = FloatDict()
         if isinstance(other, dict):
-            for k in self.keys():
-                if k in other.keys():
+            for k in list(self.keys()):
+                if k in list(other.keys()):
                     retval[k] = self[k] * other[k]
                 else:
                     retval[k] = 0.0
-            for k in other.keys():
-                if k not in self.keys():
+            for k in list(other.keys()):
+                if k not in list(self.keys()):
                     retval[k] = 0.0
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k] * other
         return retval
     
     def __rmul__(self, other):
         retval = FloatDict()
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k] * other
         return retval
 
@@ -65,24 +65,24 @@ class FloatDict(dict):
         float value."""
         retval = FloatDict()
         if isinstance(other, dict):
-            for k in self.keys():
-                if k in other.keys():
+            for k in list(self.keys()):
+                if k in list(other.keys()):
                     retval[k] = self[k]/other[k]
                 else:
                     retval[k] = 0.0
-            for k in other.keys():
-                if k not in self.keys():
+            for k in list(other.keys()):
+                if k not in list(self.keys()):
                     retval[k] = 0.0
         if isinstance(other, float):
-            for k in self.keys():
+            for k in list(self.keys()):
                 retval[k] = self[k]/other
         return retval
 
 if __name__ == "__main__":
     D = FloatDict({1 : 4.55, 2 : 3.78, 3: 8.22})
     L = FloatDict({1 : 5.4, 2 : 9.4, 4: 11.22})
-    print D
-    print L
+    print(D)
+    print(L)
 #    print D*1.4 + L*1.7
-    print 1.4*D + 1.7*L
-    print 1.4*D
+    print(1.4*D + 1.7*L)
+    print(1.4*D)

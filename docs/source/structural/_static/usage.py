@@ -20,5 +20,5 @@ calc.pg = 75.0
 calc.recalc()
 
 # Call render to produce the report as a unicode string
-print calc.render("txt")
+print((calc.render("txt")))
 
