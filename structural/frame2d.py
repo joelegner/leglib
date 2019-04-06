@@ -56,11 +56,6 @@ class Node(geom.Point):
         "Compare for sorting"
         return (self.x, self.y) < (other.x, other.y)
 
-
-    def __cmp__(self, other):
-        "Compare for sorting"
-        return cmp((self.x, self.y), (other.x, other.y))
-
     def pin(self):
         "Gives the ndoe a pinned support conditon."
         self.fixed_x = True

@@ -73,13 +73,5 @@ class SoilStratum(Soil):
     def __lt__(self, other):
         return self.z < other.z
 
-    def __cmp__(self, other):
-        if self.z < other.z:
-            return -1
-        elif self.z > other.z:
-            return 1
-        else:
-            return 0
-
 default_soil = Soil(name="Default Soil")
 

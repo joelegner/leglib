@@ -10,6 +10,11 @@ INCHES_PER_METER = 39.3701
 #==============================================================================
 # General number formatting
 #==============================================================================
+def integer(value):
+    "Returns float value formated to digits decimal places."
+    return "%d" % (value)
+
+
 def fixed(value, digits=2):
     "Returns float value formated to digits decimal places."
     fmtstr = "%%.%df" % digits
@@ -26,7 +31,11 @@ def sigdig(value, digits=3):
         fmtstr = "%%.%df" % (places)
     else:
         fmtstr = "%.0f"
-    return fmtstr % (round(value, places))
+    try:
+        retval = fmtstr % (round(value, places))
+    except:
+        retval = "ERROR: fmt.fixed() value not found"
+    return retval
 
 
 def money(num):
@@ -73,10 +82,20 @@ def ft_in(inches_in, denom=16):
 
 def inches(inches_in, denom=16):
     "Formats inches as inches"
+    if not type(inches_in) == float:
+        raise Exception("%s is not a float" % inches_in)
+
     if inches_in < 0:
         return "-%s" % (inches(math.fabs(inches_in)))
     else:
         return "%s\"" % frac(inches_in, denom)
+
+def inches_decimal(inches_in):
+    "Formats inches as decimal inches up to 4 decimal places"
+    if "%d" % inches_in == "%s" % inches_in:
+        return "%d" % inches_in
+    else:
+        return "%.3d" % inches_in
 
 def m(inches_in, digits=3):
     "Formats inches as meters"
@@ -181,3 +200,12 @@ def frac(val, denom = 64):
         else:
             return "%d"% (whole)
 
+
+class SigdigFloat(float):
+    "Used in place of a float for string formatting only.  Prints in significant digits format."
+    def __init__(self, value, digits=3):
+        self.value = value
+        self.digits = digits
+
+    def __str__(self):
+        return sigdig(self.value, self.digits)

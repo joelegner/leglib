@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+"""This program merges any number of text files as follows:
+
+A.txt
+    Create
+    Read
+    Update
+    Delete
+
+B.txt
+    Projects
+    Tasks
+    References
+
+mergetextfiles A.txt B.txt
+
+Output:
+    Create Projects
+    Create Tasks
+    Create References
+    Read Projects
+    Read Tasks
+    Read References
+    Update Projects
+    Update Tasks
+    Update References
+    Delete Projects
+    Delete Tasks
+    Delete References
+"""
+import argparse
+import sys
+
+def _usage():
+    print("Usage: mergetextfiles A.txt B.txt")
+
+def _parse(items):
+    retval = []
+    for i in items[0]:
+        if len(items) ==  1:
+            retval.append(i)
+        else:
+            for j in _parse(items[1:]):
+                retval.append("%s %s" % (i, j))
+    return retval
+    
+args = sys.argv
+if len(args) < 3:
+    _usage()
+else:
+    items = [ ]
+    filenames = sys.argv[1:]
+    for filename in filenames:
+        f = open(filename, "r")
+        items.append([line.replace('\n', '') for line in f.readlines()])
+        f.close()
+    for line in _parse(items):
+        print(line)
+    
+

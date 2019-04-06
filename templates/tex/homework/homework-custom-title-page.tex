@@ -1,0 +1,37 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{mathptmx}       % better font
+\usepackage{graphicx}
+\usepackage[titletoc]{appendix}
+\usepackage{longtable}
+\usepackage{enumitem}       % To use letters for enumerate environments, for example
+\usepackage{indentfirst}    % I want all paragraphs indented
+\usepackage[makeroom]{cancel}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{collectbox}
+\usepackage{multicol}
+\usepackage{etoc}
+
+\setlength{\parindent}{0pt} % Default is 15pt.
+\renewcommand{\baselinestretch}{1.3}    % Use a wider line spacing
+\setlength{\parskip}{1em}
+
+{% macro answer(text) -%}
+\begin{center}
+    \fbox{ {{text}} }
+\end{center}
+{%- endmacro %}
+
+\begin{document}
+\title{ {% block title %}Report Title{% endblock title %} }
+\author{ {% block author %}Joe Legner, P. E.{% endblock author %} }
+\date{ {% block date %}\today{% endblock date %} }
+\begin{titlepage}
+{% block titlepage %}{% endblock titlepage %}
+\end{titlepage}
+{% block body %}
+{% endblock body %}
+\end{document}

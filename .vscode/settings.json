@@ -1,3 +1,8 @@
 {
-    "python.pythonPath": "/home/joe/.virtualenvs/AHP-Mx4F7qJ8/bin/python"
+    "python.pythonPath": "/bin/python3",
+    "spellright.language": [],
+    "spellright.documentTypes": [
+        "markdown",
+        "plaintext"
+    ]
 }

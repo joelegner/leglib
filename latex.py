@@ -86,6 +86,7 @@ def ft_in(inches_in, denom = 64):
 
 def inches(inches_in, denom = 64):
     "Formats inches as inches"
+    assert type(inches_in) == float
     return "%s''" % frac(inches_in, denom)
 
 #==============================================================================
@@ -170,6 +171,7 @@ def frac(val, denom = 64):
         return "%d/%d"% (numer, denom)
     else:
         return "%d"% (whole)
+
 
 #==============================================================================
 # Module testing
