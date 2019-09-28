@@ -1,5 +1,20 @@
 """ACI reinforcing steel class and helper function.  See ACI 318-05 p. 407."""
 
+class RebarSteel:
+    def __init__(self, fy):
+        self.fy = fy
+        self.E = 29000000.0
+
+    @property
+    def ey(self):
+        "Returns yield strain"
+        return self.fy/self.E
+
+    def __str__(self):
+        return "Steel fy = %d psi" % int(self.fy)
+
+a615_grade60 = RebarSteel(fy = 60000.0)
+
 
 class Rebar:
     def __init__(self, name, db, Ab, wt):

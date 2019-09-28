@@ -23,4 +23,3 @@ class Concrete:
         if self.wc < 90 or self.wc > 155:
             return None
         return self.wc**1.5*33.0*math.sqrt(self.fc)/1000.0
-
