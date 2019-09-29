@@ -2,6 +2,7 @@
 
 import math
 
+
 class Circle:
     "Circle.  See AISC 2005 p. 17-39 for section property formulas."
 
@@ -17,8 +18,19 @@ class Circle:
         return self.R()/2.0
 
     def A(self):
-        "Returns area of circle = pi*R^2"
+        "Returns area of circle = pi*R**2"
         return math.pi*(self.R()**2)
+
+    def segment_area(self, y):
+        "Returns area of a circle segment above horizontal axis at y"
+        r = self.R()
+        return 2*((r**2.0*math.asin(r/math.fabs(r)))/2.0-(r**2*math.asin(y/math.fabs(r))+y*math.sqrt(r**2-y**2))/2.0)
+
+    def first_moment_segment_area(self, y):
+        "Returns the first moment about an axis at y = y"
+        r = self.R()
+        return -(2.0*math.sqrt(r**2-y**2)*(y**2-r**2))/3.0
+
 
     def I(self):
         "Moment of inertia"
@@ -31,6 +43,20 @@ class Circle:
     def Z(self):
         "Plastic section modulus"
         return (self.d**3)/6.0
+
+
+class Donut:
+    def __init__(self, r1, r2):
+        self.outer = Circle(d=2*max(r1, r2))
+        self.inner = Circle(d=2*min(r1, r2))
+
+    @property
+    def r1(self):
+        return self.outer.d/2.0
+
+    @property
+    def r2(self):
+        return self.inner.d/2.0
 
 
 class Cylinder:
@@ -56,6 +82,7 @@ class Cylinder:
 
     def A(self):
         return 2.0*self.Aend() + self.Aside()
+
 
 class HollowCircle:
     "Hollow circle.  See AISC 2005 p. 17-39 for section property formulas."
@@ -84,6 +111,7 @@ class HollowCircle:
     def Z(self):
         "Plastic section modulus"
         return self.d**3/6.0 - self.d1**3/6.0
+
 
 class Rectangle:
 
