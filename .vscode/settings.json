@@ -9,5 +9,6 @@
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": false,
-    "python.linting.pylintPath": "/Users/joelegner/.local/share/virtualenvs/leglib-pkg-VDGtrXyz/bin/pylint"
+    "python.linting.pylintPath": "/Users/joelegner/.local/share/virtualenvs/leglib-pkg-VDGtrXyz/bin/pylint",
+    "python.linting.pylintArgs": []
 }

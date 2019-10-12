@@ -10,6 +10,7 @@ ASD_WIND_FACTOR = 1.0
 # Wind loads
 #####################################################################
 
+
 def Kz(z, exposure="C", case=1):
     z = float(z)
     exposure = exposure.upper()
@@ -29,7 +30,7 @@ def Kz(z, exposure="C", case=1):
         retval = 2.01*((15.0/zg)**(2.0/alpha))
     else:
         retval = 2.01*((z/zg)**(2.0/alpha))
-    if exposure=="B" and case==1:
+    if exposure == "B" and case == 1:
         retval = max(retval, 0.7)
     return retval
 
@@ -60,13 +61,16 @@ def pf(pg, I=1.0, Ce=1.0, Ct=1.0):
         retval = max(retval, 20.0*I)
     return retval
 
+
 def is_unbalanced(roof):
     return roof.rise > max(0.5, roof.W/70.0)
+
 
 def snow_density(pg):
     "Returns snow density, gamma, in pcf per ASCE 7-05 Eq. (7-3), p. 83"
     # Limited to 30 pcf max per Eq. (7-3)
     return min(0.13*pg+14.0, 30.0)
+
 
 def Cs(roof, Ct):
     if almost_equal(Ct, 1.0):
@@ -91,8 +95,10 @@ def Cs(roof, Ct):
         raise ValueError("Ct must be 1.0, 1.1 or 1.2")
     return min(1.0, max(0.0, interpolate(x1, y1, x2, y2, roof.theta())))
 
+
 def ps(roof, pg, I=1.0, Ce=1.0, Ct=1.0):
     return Cs(roof, Ct)*pf(pg, I, Ce, Ct)
+
 
 class SnowDrift:
 
@@ -113,7 +119,7 @@ class SnowDrift:
     def recalc(self):
         "Perform calculations and store results"
         self.pf = pf(pg=self.pg, I=self.I, Ce=self.Ce,
-                Ct=self.Ct)
+                     Ct=self.Ct)
         self.hb = self.pf/self.gamma()
         lu = max(self.lu, 25.0)
         self.hd0 = 0.43*(lu)**(1.0/3.0)*(self.pg + 10.0)**(1.0/4.0) - 1.5
@@ -127,4 +133,3 @@ class SnowDrift:
             self.w = round(4.0*self.hd0**2/self.hc*2.0)/2.0
         else:
             self.w = round(4.0*self.hd*2.0)/2.0
-
