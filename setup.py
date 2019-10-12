@@ -18,6 +18,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires = ['numpy', 'jinja2', 'geopy', 'pylab'],
+    install_requires = ['numpy', 'jinja2'],
     python_requires='>=3.6',
 )
