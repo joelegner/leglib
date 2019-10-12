@@ -1,5 +1,5 @@
 import unittest
-import leglib.util
+from leglib import util
 
 
 class TestUtilities(unittest.TestCase):
