@@ -1,7 +1,7 @@
 "ASCE 7-05 load calculation functions"
 
-from util import almost_equal
-from util import interpolate
+from leglib.util import almost_equal
+from leglib.util import interpolate
 
 name = "ASCE7-05"
 ASD_WIND_FACTOR = 1.0

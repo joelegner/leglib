@@ -1,7 +1,7 @@
 "Basic 2D geometry classes and functions"
 
 import math
-from util import almost_equal
+from leglib.util import almost_equal
 
 #try:
 #    import pylab

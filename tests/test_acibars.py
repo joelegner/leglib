@@ -1,5 +1,5 @@
-from structural.acibars import Rebar
-from structural.acibars import get_bar
+from leglib.structural.acibars import Rebar
+from leglib.structural.acibars import get_bar
 import unittest
 
 
@@ -12,5 +12,5 @@ class TestRebar(unittest.TestCase):
         self.assertEqual("#5", "%s" % no5)
 
 
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()

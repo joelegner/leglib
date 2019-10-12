@@ -1,8 +1,8 @@
-from shapes import Circle
-from shapes import Cylinder
-from shapes import HollowCircle
-from shapes import Rectangle
-from shapes import RectangularPrism
+from leglib.shapes import Circle
+from leglib.shapes import Cylinder
+from leglib.shapes import HollowCircle
+from leglib.shapes import Rectangle
+from leglib.shapes import RectangularPrism
 import math
 import unittest
 

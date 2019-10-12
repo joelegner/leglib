@@ -1,9 +1,9 @@
-from geom import Line
-from geom import Point
-from geom import Polygon
-from geom import Segment
-from geom import Vector
-from geom import dist
+from leglib.geom import Line
+from leglib.geom import Point
+from leglib.geom import Polygon
+from leglib.geom import Segment
+from leglib.geom import Vector
+from leglib.geom import dist
 import unittest
 
 

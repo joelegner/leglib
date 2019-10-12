@@ -1,5 +1,5 @@
 import unittest
-import util
+import leglib.util
 
 
 class TestUtilities(unittest.TestCase):
@@ -7,7 +7,7 @@ class TestUtilities(unittest.TestCase):
     def test_interpolate(self):
         # y = 1.3 + (1.4 - 1.3)/(7.0 - 1.0)*(1.5 - 1.0) = 1.30833
         self.assertAlmostEqual(util.interpolate(1.0, 1.3, 7.0, 1.4, 1.5),
-            1.30833, places=3)
+                               1.30833, places=3)
 
     def test_almost_equal(self):
         self.assertFalse(util.almost_equal(5.4432434, 5.4432477, places=5))
@@ -31,7 +31,8 @@ class TestUtilities(unittest.TestCase):
         self.assertAlmostEqual(util.str_to_feet("-5'-7 1/2"), -5.625, places=3)
         self.assertAlmostEqual(util.str_to_feet("-5'-7''"), -5.58333, places=3)
         self.assertAlmostEqual(util.str_to_feet("-5'-7\""), -5.58333, places=3)
-        self.assertAlmostEqual(util.str_to_feet("-8 5/8\""), -0.71875, places=3)
+        self.assertAlmostEqual(util.str_to_feet(
+            "-8 5/8\""), -0.71875, places=3)
         self.assertAlmostEqual(util.str_to_feet("-8"), -0.666667, places=3)
         self.assertAlmostEqual(util.str_to_feet("15'-7''"), 15.58333, places=3)
         self.assertAlmostEqual(util.str_to_feet("15'-7\""), 15.58333, places=3)
@@ -51,5 +52,6 @@ class TestUtilities(unittest.TestCase):
         self.assertEqual(util.hr(width=10, char='#'), "##########")
         self.assertEqual(util.line(width=11, char='@'), "@@@@@@@@@@@")
 
-if __name__ == "__main__": # pragma: no cover
+
+if __name__ == "__main__":  # pragma: no cover
     unittest.main()
