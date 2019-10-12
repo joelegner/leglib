@@ -1,7 +1,7 @@
 from .load_cases import calc_combos
 from .load_cases import cases
 from .load_cases import combos
-from shapes import RectangularPrism
+from leglib.shapes import RectangularPrism
 from .soil import Soil
 from leglib import fmt
 import math
@@ -11,11 +11,11 @@ class RectFooting(RectangularPrism):
 
     def __init__(self, B=4.0, L=4.0, T=1.0, gamma_c=0.145):
         RectangularPrism.__init__(self, B, L, T)
-        self.gamma_c = gamma_c # pcf
+        self.gamma_c = gamma_c  # pcf
 
     def __unicode__(self):
         return "Footing %s x %s x %s" % (fmt.ft_in(self.L*12.0), fmt.ft_in(self.B*12.0),
-            fmt.ft_in(self.T*12.0))
+                                         fmt.ft_in(self.T*12.0))
 
     def __str__(self):
         return self.__unicode__()
@@ -71,7 +71,7 @@ class FootingPierAssembly:
 
     def __unicode__(self):
         return "%s with pier %sL x %sW x %sH" % (self.footing, fmt.ft_in(self.pier.L*12.0),
-            fmt.ft_in(self.pier.B*12.0), fmt.ft_in(self.pier.T*12.0))
+                                                 fmt.ft_in(self.pier.B*12.0), fmt.ft_in(self.pier.T*12.0))
 
     def __str__(self):
         return self.__unicode__()
@@ -156,7 +156,7 @@ class FootingPierAssembly:
         self.results.Vx = calc_combos("ASD", self.Vx)
 
         for i in range(0, len(self.results.P)):
-            fmin, fmax = self.footing.analyze(self.results.P[i], self.results.Mx[i])
+            fmin, fmax = self.footing.analyze(
+                self.results.P[i], self.results.Mx[i])
             self.results.fmax[i] = fmax
             self.results.fmin[i] = fmin
-

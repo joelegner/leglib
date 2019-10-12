@@ -1,7 +1,7 @@
 from leglib.structural.footing import FootingPierAssembly
 from leglib.structural.report import Report
 from leglib.structural.soil import Soil
-from leglib.structural.tests.test_driftcalc import TestDriftCalc
+from tests.test_driftcalc import TestDriftCalc
 import unittest
 
 
@@ -9,12 +9,13 @@ class TestReport(unittest.TestCase):
 
     def test_txt_report(self):
         m = FootingPierAssembly(B=5.0, L=5.0, T=1.5, Lp=2.0, Bp=2.0, Hp=3.0,
-                gamma_c=0.145, soil=Soil(gamma_s=0.090))
+                                gamma_c=0.145, soil=Soil(gamma_s=0.090))
         r = Report(m)
         # It should return a unicode string
         self.assertEqual(type(r.render("txt")), type("Joe"))
         # The string should not be empty
         self.assertGreater(len(r.render("txt")), 0)
+
 
 class TestDriftCalcReport(TestDriftCalc):
 
@@ -23,5 +24,6 @@ class TestDriftCalcReport(TestDriftCalc):
         self.assertEqual(type(r.render("txt")), type("Joe"))
         self.assertGreater(len(r.render("txt")), 0)
 
-if __name__ == '__main__': # pragma: no cover
+
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()

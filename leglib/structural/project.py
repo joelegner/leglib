@@ -1,5 +1,5 @@
 from leglib.structural import report
-import util
+from leglib import util
 
 
 class Project(object):

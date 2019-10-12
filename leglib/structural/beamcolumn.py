@@ -1,4 +1,4 @@
-from floatdict import FloatDict
+from leglib.floatdict import FloatDict
 from leglib.structural.frame2d import Frame2D
 from leglib.structural.load_cases import calc_combos
 from leglib.structural.load_cases import cases

@@ -1,5 +1,6 @@
 from .report import Report
-import util
+from leglib import util
+
 
 class BaseCalc(object):
 
@@ -43,4 +44,3 @@ class BaseCalc(object):
         "Perform the calculations needed to produce results"
         # Implement in derived class
         raise NotImplementedError("Derived class does not implement recalc()")
-

@@ -2,14 +2,15 @@ import math
 
 ERROR_LIMIT = 0.005  # feet
 
+
 class EmbeddedPier:
     "Reference 2006 IBC Section 1805.7.2"
 
-    def __init__(self, b, P, h, S0, constrained = False):
+    def __init__(self, b, P, h, S0, constrained=False):
         self.b = float(b)   # Width of pier in feet
         self.P = float(P)   # Lateral force in pounds
         self.h = float(h)   # Height from ground surface to P force
-        self.S0 = float(S0) # Allowable lateral earth pressure (Table 1804.2)
+        self.S0 = float(S0)  # Allowable lateral earth pressure (Table 1804.2)
         self.constrained = constrained
         self.depth = 1.0
 
@@ -36,7 +37,7 @@ class EmbeddedPier:
             done = error <= ERROR_LIMIT
             if not done:
                 retval = (retval + dreq)/2.0
-        self.depth=retval
+        self.depth = retval
         return round(retval, 2)
 
     def _d_noncon(self):
@@ -44,14 +45,13 @@ class EmbeddedPier:
         retval = self.depth
         done = False
         while not done:
-            S1 = self.S1(retval)
             A = 2.34*self.P/(self.b*self.S1(retval))
             dreq = 0.5*A*(1.0 + math.sqrt(1.0 + 4.36*self.h/A))
             error = math.fabs(retval - dreq)
             done = error <= ERROR_LIMIT
             if not done:
                 retval = (retval + dreq)/2.0
-        self.depth=retval
+        self.depth = retval
         return round(retval, 2)
 
     def d(self):
@@ -67,4 +67,3 @@ class EmbeddedPier:
         while self.d() > target_depth:
             self.b = self.b + 0.01
         return self.b
-

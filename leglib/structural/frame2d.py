@@ -24,7 +24,7 @@
 """
 
 import copy
-import geom
+from leglib import geom
 import math
 import numpy
 

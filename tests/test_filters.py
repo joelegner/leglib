@@ -1,6 +1,6 @@
 from leglib.structural.project import Project
 from leglib.structural.report import Report
-import filters as f
+from leglib import filters as f
 import unittest
 
 
@@ -32,7 +32,7 @@ class TestFilters(unittest.TestCase):
         self.assertEqual(f.sigdig(self.tf, 2), "0.55")
 
     def test_metric_filters(self):
-        self.project = Project(is_metric = True)
+        self.project = Project(is_metric=True)
         r = Report(self)
         # It should return a unicode string
         self.assertEqual(type(r.render("txt")), type("Joe"))
@@ -47,7 +47,7 @@ class TestFilters(unittest.TestCase):
         self.assertEqual(f.length(self.L, self), "2.22 m")
 
     def test_member_is_metric(self):
-        self.project = Project(is_metric = False)
+        self.project = Project(is_metric=False)
         self.is_metric = True   # should behave as if project.is_metric = True
         self.assertEqual(f.dim(self.L, self), "2220 mm")
         self.assertEqual(f.dim(self.tf), "9/16\"")
@@ -56,5 +56,5 @@ class TestFilters(unittest.TestCase):
         self.assertEqual(f.length(self.L, self), "2.22 m")
 
 
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()
