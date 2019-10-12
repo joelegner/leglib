@@ -1,5 +1,5 @@
-from structural import FBC2010
-from structural.windcalc import WindCalc
+from leglib.structural import FBC2010
+from leglib.structural.windcalc import WindCalc
 import unittest
 
 class TestWindCalcASCE7_10(unittest.TestCase):

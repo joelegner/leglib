@@ -1,4 +1,4 @@
-from structural.pit import Pit
+from leglib.structural.pit import Pit
 import unittest
 
 class TestPit(unittest.TestCase):

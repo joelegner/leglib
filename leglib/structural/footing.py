@@ -3,7 +3,7 @@ from .load_cases import cases
 from .load_cases import combos
 from shapes import RectangularPrism
 from .soil import Soil
-import fmt
+from leglib import fmt
 import math
 
 

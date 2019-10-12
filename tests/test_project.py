@@ -1,5 +1,5 @@
-from structural.driftcalc import DriftCalc
-from structural.project import Project
+from leglib.structural.driftcalc import DriftCalc
+from leglib.structural.project import Project
 import unittest
 
 class TestBasicProject(unittest.TestCase):

@@ -1,6 +1,6 @@
-from structural import IBC2009
-from structural.calc import BaseCalc
-from structural.roof import Roof
+from leglib.structural import IBC2009
+from leglib.structural.calc import BaseCalc
+from leglib.structural.roof import Roof
 
 class SnowCalc(BaseCalc):
 

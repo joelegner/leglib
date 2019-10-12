@@ -3,7 +3,7 @@
 # If you add a new filter, add it to the list of imports in structural/report.py
 # Also add it to Jinja in the body of Report.render()
 
-import fmt
+from leglib import fmt
 
 def _is_metric(member):
     retval = False

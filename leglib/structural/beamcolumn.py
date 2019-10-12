@@ -1,8 +1,8 @@
 from floatdict import FloatDict
-from structural.frame2d import Frame2D
-from structural.load_cases import calc_combos
-from structural.load_cases import cases
-from structural.load_cases import combos
+from leglib.structural.frame2d import Frame2D
+from leglib.structural.load_cases import calc_combos
+from leglib.structural.load_cases import cases
+from leglib.structural.load_cases import combos
 import math
 import os
 

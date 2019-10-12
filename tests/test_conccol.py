@@ -1,11 +1,12 @@
-from structural.conccol import RectTiedColumn
+from leglib.structural.conccol import RectTiedColumn
 import unittest
+
 
 class TestRectTiedColumn(unittest.TestCase):
 
     def setUp(self):
         self.col = RectTiedColumn(b=12.0, h=24.0, nx=2, ny=5,
-               barsize=14, tiebarsize=4, fc=6000, cover=1.5)
+                                  barsize=14, tiebarsize=4, fc=6000, cover=1.5)
 
     def test_props(self):
         self.assertEqual(self.col.n(), 10)
@@ -32,5 +33,5 @@ class TestRectTiedColumn(unittest.TestCase):
 #        self.assertAlmostEqual(self.col.case_1(), 27.3088, places=2)
 
 
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()

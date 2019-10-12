@@ -1,5 +1,5 @@
-from structural.retain import RetainingWall
-from structural.soil import Soil
+from leglib.structural.retain import RetainingWall
+from leglib.structural.soil import Soil
 import unittest
 
 class TestRetainingWall(unittest.TestCase):

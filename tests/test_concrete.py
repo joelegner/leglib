@@ -1,4 +1,4 @@
-from structural.concrete import Concrete
+from leglib.structural.concrete import Concrete
 import unittest
 
 

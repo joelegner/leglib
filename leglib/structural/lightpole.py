@@ -1,8 +1,10 @@
-from structural.calc import BaseCalc
-from structural import FBC2010
+from leglib.structural.calc import BaseCalc
+from leglib.structural import FBC2010
+
 
 class LightPole(BaseCalc):
     """A light pole for light pole base design"""
+
     def __init__(self, L, shape, size, V, Kzt=1.0, exposure="C", code=FBC2010):
         self.L = L
         self.V = V
@@ -10,7 +12,7 @@ class LightPole(BaseCalc):
         self.exposure = exposure
         self.shape = shape.lower()
         self.size = size
-        self.fixtures=[]
+        self.fixtures = []
         self.Kzt = Kzt
         self.G = 0.85
         self.Cf = 2.0
@@ -23,12 +25,12 @@ class LightPole(BaseCalc):
     def recalc(self):
         if self.shape == "square":
             self.Kd = 0.90
-        else: # hexagonal or round
+        else:  # hexagonal or round
             self.Kd = 0.95
         self.Kz = self.code.asce7.Kz(z=self.L, exposure=self.exposure,
-                case=1)
+                                     case=1)
         self.qz = self.code.asce7.qz(self.V, z=self.L, exposure=self.exposure,
-                Kd=self.Kd, Kzt=self.Kzt)
+                                     Kd=self.Kd, Kzt=self.Kzt)
         self.Af = self.size*self.L/12.0
         self.P = self.qz*self.G*self.Cf*self.Af
         self.y = self.L/2.0
@@ -43,8 +45,8 @@ class LightPole(BaseCalc):
 
 class LightPoleBase(BaseCalc):
     """Embedded pier type light pole base"""
+
     def __init__(self, b, pole=None):
         if not isinstance(pole, LightPole):
             self.pole = LightPole(L=20.0, shape="round", size=6)
         self.b = b
-

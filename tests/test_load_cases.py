@@ -1,8 +1,8 @@
-from structural.load_cases import calc_combos
-from structural.load_cases import case_abbrs
-from structural.load_cases import case_names
-from structural.load_cases import cases
-from structural.load_cases import combos
+from leglib.structural.load_cases import calc_combos
+from leglib.structural.load_cases import case_abbrs
+from leglib.structural.load_cases import case_names
+from leglib.structural.load_cases import cases
+from leglib.structural.load_cases import combos
 import unittest
 
 

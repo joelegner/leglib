@@ -1,4 +1,4 @@
-from structural.sign import Sign
+from leglib.structural.sign import Sign
 import unittest
 
 B = 31.5

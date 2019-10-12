@@ -1,7 +1,7 @@
-from structural.footing import FootingPierAssembly
-from structural.report import Report
-from structural.soil import Soil
-from structural.tests.test_driftcalc import TestDriftCalc
+from leglib.structural.footing import FootingPierAssembly
+from leglib.structural.report import Report
+from leglib.structural.soil import Soil
+from leglib.structural.tests.test_driftcalc import TestDriftCalc
 import unittest
 
 

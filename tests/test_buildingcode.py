@@ -1,8 +1,8 @@
-from structural import BuildingCode
-from structural import FBC2010
-from structural import IBC2009
-from structural import NONE
-from structural import codes
+from leglib.structural import BuildingCode
+from leglib.structural import FBC2010
+from leglib.structural import IBC2009
+from leglib.structural import NONE
+from leglib.structural import codes
 import structural.asce7_10 as asce7
 import unittest
 
@@ -10,7 +10,7 @@ import unittest
 class TestBuildingCode(unittest.TestCase):
 
     def test_name(self):
-        from structural import FBC2010
+        from leglib.structural import FBC2010
         self.assertEqual("%s" % FBC2010, "2010 FBC")
 
     def test_default_codes(self):
@@ -24,5 +24,5 @@ class TestBuildingCode(unittest.TestCase):
         self.assertTrue(NONE in codes)
 
 
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()

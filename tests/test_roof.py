@@ -1,4 +1,4 @@
-from structural.roof import Roof
+from leglib.structural.roof import Roof
 import unittest
 
 class TestRoof(unittest.TestCase):

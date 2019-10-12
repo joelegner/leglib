@@ -1,7 +1,7 @@
-from structural.footing import FootingPierAssembly
-from structural.footing import RectFooting
-from structural.load_cases import combos
-from structural.soil import Soil
+from leglib.structural.footing import FootingPierAssembly
+from leglib.structural.footing import RectFooting
+from leglib.structural.load_cases import combos
+from leglib.structural.soil import Soil
 import unittest
 
 

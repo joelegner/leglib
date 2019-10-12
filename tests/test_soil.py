@@ -1,5 +1,5 @@
-from structural.soil import Soil
-from structural.soil import SoilStratum
+from leglib.structural.soil import Soil
+from leglib.structural.soil import SoilStratum
 import unittest
 
 class TestSoil(unittest.TestCase):

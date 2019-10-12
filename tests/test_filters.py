@@ -1,5 +1,5 @@
-from structural.project import Project
-from structural.report import Report
+from leglib.structural.project import Project
+from leglib.structural.report import Report
 import filters as f
 import unittest
 

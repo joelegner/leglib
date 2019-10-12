@@ -1,6 +1,6 @@
-from structural import IBC2009
-from structural import set_code
-from structural.roof import Roof
+from leglib.structural import IBC2009
+from leglib.structural import set_code
+from leglib.structural.roof import Roof
 import unittest
 
 # ======================

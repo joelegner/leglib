@@ -1,4 +1,4 @@
-from structural.frame2d import Frame2D
+from leglib.structural.frame2d import Frame2D
 import math
 import unittest
 

@@ -1,6 +1,6 @@
-from structural import FBC2010
-from structural.lightpole import LightPole
-from structural.lightpole import LightPoleBase
+from leglib.structural import FBC2010
+from leglib.structural.lightpole import LightPole
+from leglib.structural.lightpole import LightPoleBase
 import unittest
 
 class TestLightPoleBase(unittest.TestCase):

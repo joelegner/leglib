@@ -1,4 +1,4 @@
-import fmt
+from leglib import fmt
 import math
 
 class Soil:

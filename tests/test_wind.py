@@ -1,6 +1,6 @@
-from structural import FBC2010
-from structural import IBC2009
-from structural import set_code
+from leglib.structural import FBC2010
+from leglib.structural import IBC2009
+from leglib.structural import set_code
 import unittest
 
 

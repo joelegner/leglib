@@ -1,11 +1,11 @@
-from structural import report
+from leglib.structural import report
 import util
 
 
 class Project(object):
 
     def __init__(self, name="Unnamed Project", number=None, desc=None,
-            is_metric=False):
+                 is_metric=False):
         self.name = name
         self.number = number
         self.desc = desc
@@ -50,7 +50,7 @@ class Project(object):
             return False
 
     def _update_calc(self, calc):
-        attribs = ( )
+        attribs = ()
         calc.project = self
         # Update calc project
         if hasattr(calc, "project"):
@@ -79,7 +79,5 @@ class Project(object):
     def render(self, template_type="txt"):
         return report.Report(self).render(template_type)
 
-
     def write(self, filename, template_type="txt", overwrite=False):
         report.Report(self).write(filename, template_type, overwrite)
-

@@ -1,4 +1,4 @@
-from structural.snowcalc import SnowCalc
+from leglib.structural.snowcalc import SnowCalc
 import unittest
 
 class TestSnowCalc(unittest.TestCase):

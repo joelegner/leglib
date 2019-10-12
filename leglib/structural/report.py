@@ -1,5 +1,5 @@
-from filters import dim, distance, fixed, length, ft_in, mult, sigdig
-from filters import ft_in_from_ft, distance_from_ft, check
+from leglib.filters import dim, distance, fixed, length, ft_in, mult, sigdig
+from leglib.filters import ft_in_from_ft, distance_from_ft, check
 from jinja2 import Environment
 from jinja2 import FileSystemLoader
 import os
@@ -25,7 +25,8 @@ class Report:
         env.filters["mult"] = mult
         env.filters["sigdig"] = sigdig
         env.filters["check"] = check
-        template_filename = r"%s.%s" % (self.member.__class__.__name__, template_type)
+        template_filename = r"%s.%s" % (
+            self.member.__class__.__name__, template_type)
         template = env.get_template(template_filename)
         return template.render(m=self.member)
 
@@ -35,4 +36,3 @@ class Report:
         with open(filename, "wt") as f:
             f.write(self.render(template_type))
             f.close()
-
