@@ -153,7 +153,7 @@ class BeamColumn:
         # Add nodes for each span and midspan
         frame.add_node(self.L*12.0, 0.0).roller_x()
         frame.add_node(self.L*12.0/2.0, 0.0)
-        L = self.L
+        # L = self.L
 
 #        # Add node for each point load
 #        for pl in self.pointload_set():
