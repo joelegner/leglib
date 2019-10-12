@@ -7,6 +7,7 @@ class Concrete:
         self.fc = float(fc)
         self.wc = float(wc)             # Unreinforced unit weight, pcf
         self.gamma_c = float(gamma_c)   # Reinforced unit weight, pcf
+        self.ec = 0.003                 # Default concrete strain at failure
 
     def __str__(self):
         if self.wc > 115.0:

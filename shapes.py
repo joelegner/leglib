@@ -31,6 +31,22 @@ class Circle:
         r = self.R()
         return -(2.0*math.sqrt(r**2-y**2)*(y**2-r**2))/3.0
 
+    def stress_block_area(self, c, beta1):
+        """
+        a = Depth of compression block from top of circle at y=r
+        c = Depth to neutral axis from top of circle at y=r
+        Returns area of the stress block from y=(r - a) to y=r about an axis at y=(r - c)
+        """
+        a = c*beta1
+        r = self.R()
+        return 2.0*((r**2*math.asin(r/math.fabs(r)))/2-(r**2*math.asin((r-a)/math.fabs(r))+(r-a)*math.sqrt(2*a*r-a**2))/2)
+
+    def stress_block_moment(self, c, beta1):
+        a = c*beta1
+        r = self.R()
+        # return 2.0*((3.0*c*r**2*math.asin((r-a)/math.fabs(r))+math.sqrt(2.0*a*r-a**2)*((3*c+4*a)*r-3*a*c-2*a**2))/6-(c*r**2*math.asin(r/math.fabs(r)))/2)
+
+        return 2.0*((c*r**2*math.asin(r/math.fabs(r)))/2-(3*c*r**2*math.asin((r-a)/math.fabs(r))+math.sqrt(2*a*r-a**2)*((3*c+4*a)*r-3*a*c-2*a**2))/6)
 
     def I(self):
         "Moment of inertia"

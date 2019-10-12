@@ -36,5 +36,15 @@ class TestCircle(unittest.TestCase):
             self.circ.first_moment_segment_area(y=0.0), A*y_bar, 4)
 
 
+    def test_stress_block_area(self):
+        r = self.circ.R()
+        self.assertAlmostEqual(
+            self.circ.stress_block_area(c=8, beta1=1.0), math.pi*r**2/2.0, 4)
+        self.assertAlmostEqual(
+            # Test result from calculator at https://planetcalc.com/1421/
+            self.circ.stress_block_area(c=4, beta1=1.0), 39.31, 2)
+
+
+
 if __name__ == '__main__':
     unittest.main()
