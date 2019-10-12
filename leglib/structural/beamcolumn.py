@@ -1,10 +1,8 @@
-from leglib.floatdict import FloatDict
 from leglib.structural.frame2d import Frame2D
 from leglib.structural.load_cases import calc_combos
 from leglib.structural.load_cases import cases
 from leglib.structural.load_cases import combos
 import math
-import os
 
 
 # Module settings
@@ -13,14 +11,15 @@ FRAME_E = 29000.0
 FRAME_IX = 100.0
 MIN_L = 1.0         # beams cannot be less than 1 foot long
 
+
 class AnalysisResults(dict):
 
     def __init__(self, _combos):
-        self.EIy = [ [] for i in _combos]
-        self.Mx = [ [] for i in _combos]
+        self.EIy = [[] for i in _combos]
+        self.Mx = [[] for i in _combos]
         self.R1 = [0.0 for i in _combos]
         self.R2 = [0.0 for i in _combos]
-        self.Vx = [ [] for i in _combos]
+        self.Vx = [[] for i in _combos]
         self.R1max = 0.0
         self.R2max = 0.0
 
@@ -38,8 +37,8 @@ class AnalysisResults(dict):
                     return True
             return False
         elif not result.force_empty:
-            return not (result.demand0 or result.demand1 or result.demand2 or \
-                    result.demand3 or result.demand4)
+            return not (result.demand0 or result.demand1 or result.demand2 or
+                        result.demand3 or result.demand4)
         else:
             return False
 
@@ -75,6 +74,7 @@ class BeamColumn:
 #                self.uniformload_set()])
 
     def analyze(self):
+
         _combos = combos["ASD"]
         self.results = AnalysisResults(_combos)
         # Summarize uniform loads
@@ -109,7 +109,8 @@ class BeamColumn:
 
         # Transfer deflection to results
         Ys = [y for x, y, theta in defls]
-        self.results.EIy[c] = [-Ys[nid]*FRAME_E*FRAME_IX for nid in frame.node_ids()]
+        self.results.EIy[c] = [-Ys[nid]*FRAME_E *
+                               FRAME_IX for nid in frame.node_ids()]
 
         # Transfer shear and moment to results
         xs_v = [0.0]
@@ -124,14 +125,15 @@ class BeamColumn:
             x = self.results.xs[i]
             for nid in frame.node_ids():
                 n = frame.nodes[nid]
-                P, V, M = rxns[nid]
+                V = rxns[nid][1]
                 if len(n.loads):
                     # Applied loads
-                    Pa = sum(load[0] for load in n.loads)
+                    # Pa = sum(load[0] for load in n.loads)
                     Va = sum(load[1] for load in n.loads)
-                    Ma = sum(load[2] for load in n.loads)
+                    # Ma = sum(load[2] for load in n.loads)
                 else:
-                    Pa = Va = Ma = 0.0
+                    pass
+                    # Pa = Va = Ma = 0.0
                 if n.x/12.0 <= x:
                     Ms[i] = Ms[i] + (V + Va)*(x*12.0 - n.x)
                     Vs[i + 1] = Vs[i + 1] + (V + Va)
@@ -184,14 +186,13 @@ class BeamColumn:
         for x in self.results.xs:
             frame.add_node(x, 0.0)
 
-
         # Add members
         frame.renumber_nodes()
         node_ids = frame.node_ids()
 
         for i in range(1, len(node_ids)):
-            m = frame.add_member(i - 1, i, A = FRAME_A, E = FRAME_E,
-                    I = FRAME_IX)
+            m = frame.add_member(i - 1, i, A=FRAME_A, E=FRAME_E,
+                                 I=FRAME_IX)
             assert m.length() > 0.01, m
 
         # Add nodal loads for full length uniform loads
@@ -212,4 +213,3 @@ class BeamColumn:
 #                frame.nodes[-1].add_load((-P, 0.0, 0.0))
 
         return frame
-

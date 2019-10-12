@@ -6,7 +6,8 @@
     "python.testing.pytestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": true,
-    "python.linting.pylintEnabled": false,
+    "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "python.linting.flake8Enabled": true
+    "python.linting.flake8Enabled": false,
+    "python.linting.pylintPath": "/Users/joelegner/.local/share/virtualenvs/leglib-pkg-VDGtrXyz/bin/pylint"
 }

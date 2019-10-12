@@ -4,7 +4,6 @@ from .load_cases import combos
 from leglib.shapes import RectangularPrism
 from .soil import Soil
 from leglib import fmt
-import math
 
 
 class RectFooting(RectangularPrism):
@@ -14,8 +13,8 @@ class RectFooting(RectangularPrism):
         self.gamma_c = gamma_c  # pcf
 
     def __unicode__(self):
-        return "Footing %s x %s x %s" % (fmt.ft_in(self.L*12.0), fmt.ft_in(self.B*12.0),
-                                         fmt.ft_in(self.T*12.0))
+        return "Footing %s x %s x %s" % (fmt.ft_in(self.L*12.0),
+                                         fmt.ft_in(self.B*12.0), fmt.ft_in(self.T*12.0))
 
     def __str__(self):
         return self.__unicode__()
