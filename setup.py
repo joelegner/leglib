@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="leglib", # Replace with your own username
-    version="0.0.3",
+    version="0.0.4",
     author="Joe Legner",
     author_email="joelegner@gmail.com",
     description="My personal Python shared package with lots of weird stuff.",
