@@ -2,7 +2,7 @@
 Formatting functions used to format various numerical and physical
 quantities as strings.
 """
-from leglib.util import almost_equal
+from util import almost_equal
 import math
 
 INCHES_PER_METER = 39.3701

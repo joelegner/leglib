@@ -19,3 +19,9 @@ $ pipenv install leglib
 >>> sigdig(3.843718473821748732184732, 5)
 '3.84372'
 ```
+
+## Testing
+
+```bash
+$ make test
+```
