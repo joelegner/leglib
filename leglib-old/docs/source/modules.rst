@@ -1,5 +1,5 @@
-leglib
-======
+.
+=
 
 .. toctree::
    :maxdepth: 4
