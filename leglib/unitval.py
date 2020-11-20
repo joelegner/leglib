@@ -1,3 +1,31 @@
+"""
+This module provides the Length class which keeps track of units for you.
+
+>>> A = Length(12.875, feet)
+>>> B = Length(9.5, inch)
+>>> C = Length(180.75, feet)
+>>> print(A)
+12.88 ft
+>>> print(B)
+9.500 in
+>>> print(C)
+180.8 ft
+>>> print(A+B)
+13.67 ft
+>>> print(C + 5.0)
+185.8 ft
+>>> print(C + 15)
+195.8 ft
+>>> print(15 + C)
+195.8 ft
+>>> print(5*A)
+64.38 ft
+>>> print(A*B)
+611.6 ft^2
+>>> A=A*B
+>>> print(A*A)
+33750000 ft^6
+"""
 import fmt
 from decimal import *
 
