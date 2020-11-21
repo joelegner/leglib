@@ -25,3 +25,81 @@ $ pipenv install leglib
 ```bash
 $ make test
 ```
+
+## UnitVal
+
+The UnitVal class represents an engineering quantity with units of either force, distance, or both. It is primarily intended for use in structural engineering applications but could later be extended to other knowledge areas.
+
+Here are some usage examples. Let's initialize two variables: a distance and a force.
+
+```python
+>>> L = 42.0*inches
+>>> P = 21.4*kips
+>>> print(L)
+42.000 in
+>>> print(P)
+21.400 k
+```
+
+Now we can calculate the moment which is the force applied over the distance.
+
+``` python
+>>> print(P*L)
+898.80 k-in
+```
+
+When units are inconsistent between two variables, UnitVal resolves the conflict by retaining the units of the left-hand side of the expression. So if we reverse $P*L$ we get different units.
+
+```python
+>>> print(L*P)
+898800 lb-in
+```
+
+You can also multiply a UnitVal by a float, integer, or Decimal type.
+
+```python
+>>> print(L*P*0.5)
+449400 lb-in
+```
+
+UnitVal keeps track of the exponents of its two unit types (distance and force) so that we can calculate areas, for example.
+
+>>> print(L*L)
+1764.0 in^2
+```
+
+UnitVal will substitute psf, psi, ksi, Pa, kPa, MPa, etc. for the appropriate combination of units. For example, it replaces `lb/ft^2` with `psf`, which means "pounds per square foot."
+
+```python
+>>> B = 17.5*feet
+>>> A = B*L
+>>> Q = P/A
+>>> print(Q)
+349.39 psf
+```
+
+You can also change the units of a UnitVal instance by passing the units you want to change to.
+
+```python
+>>> L = 24.5*feet
+>>> L.change_units(inches)
+>>> print(L)
+294.00 in
+```
+
+Units can be changed to the special aggregate units too (psi, ksi, kPa, etc.).
+
+```python
+>>> pressure = 1000.0*psi
+>>> print(pressure)
+1000.0 psi
+>>> pressure.change_units(kilonewtons)
+>>> print(pressure)
+6894.6 kPa
+>>> stress = 60*ksi
+>>> print(stress)
+60.000 ksi
+>>> stress.change_units(megapascals)
+>>> print(stress)
+413.68 MPa
+"""

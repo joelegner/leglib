@@ -169,8 +169,6 @@ class UnitVal:
         else:
             return f"{self.unitnames[1]}^{p}"
         
-
-
 # Base unit for length is the inch
 inches = UnitVal(value=Decimal(1.0), unitnames=["in", "lb"], power=[1, 0])
 feet = UnitVal(value=Decimal(12.0), unitnames=["ft", "lb"], power=[1, 0])
@@ -184,14 +182,9 @@ newtons = UnitVal(value=Decimal(0.2248089), unitnames=["m", "N"], power=[0, 1])
 kilonewtons = UnitVal(value=Decimal(1000.0*0.2248089), unitnames=["m", "kN"], power=[0, 1])
 meganewtons = UnitVal(value=Decimal(1000000.0*0.2248089), unitnames=["m", "MN"], power=[0, 1])
 
-# Pressure unit is pounds and inches: psi
+# Base unit for pressure unit is derived from the above as pounds per square inch, psi.
 psi = UnitVal(value=Decimal(1.0), unitnames=["in", "lb"], power=[-2, 1])
 ksi = UnitVal(value=Decimal(1000.0), unitnames=["in", "k"], power=[-2, 1])
 kilopascals = UnitVal(value=Decimal(0.1450377), unitnames=["m", "kN"], power=[-2, 1])
 megapascals = UnitVal(value=Decimal(1000.0*0.1450377), unitnames=["m", "MN"], power=[-2, 1])
 
-if __name__ == "__main__":
-    stress = 60*ksi
-    print(stress)
-    stress.change_units(megapascals)
-    print(stress)
