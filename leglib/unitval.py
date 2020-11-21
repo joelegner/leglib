@@ -30,6 +30,9 @@ This module provides the UnitVal class which keeps track of units for you.
 >>> W.unitnames[1] = "k"
 >>> print(W)
 6.0246 k
+>>> L.change_units(inches)
+>>> print(L)
+294.00 in
 """
 import fmt
 from decimal import *
@@ -77,6 +80,10 @@ class UnitVal:
         lrat, lpow = length_units[self.unitnames[0]], self.power[0]
         frat, fpow = force_units[self.unitnames[1]], self.power[1]
         return self.value*(Decimal(lrat)**lpow)*(Decimal(frat)**fpow)
+
+    def change_units(self, other):
+        assert hasattr(other, "unitnames")
+        self.unitnames = tuple(other.unitnames)
 
     def __mul__(self, other):
         if isinstance(other, UnitVal):
@@ -166,4 +173,5 @@ if __name__ == "__main__":
     print(L)
     delta = 5*w*L*L*L*L/(384.0*29000.0*ksi*82.4*inches*inches*inches*inches)
     print(delta)
-    print(inches*delta/inches)
+    delta.change_units(inches)
+    print(delta)
