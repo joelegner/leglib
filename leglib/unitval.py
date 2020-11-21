@@ -33,6 +33,18 @@ This module provides the UnitVal class which keeps track of units for you.
 >>> L.change_units(inches)
 >>> print(L)
 294.00 in
+>>> pressure = 1000.0*psi
+>>> print(pressure)
+1000.0 psi
+>>> pressure.change_units(kilonewtons)
+>>> print(pressure)
+6894.6 kPa
+>>> stress = 60*ksi
+>>> print(stress)
+60.000 ksi
+>>> stress.change_units(megapascals)
+>>> print(stress)
+413.68 MPa
 """
 import fmt
 from decimal import *
@@ -45,6 +57,7 @@ force_units = {
     "k" : Decimal(1000.0),
     "N" : Decimal(0.22480894244319),
     "kN" : Decimal(224.80894387096),
+    "MN" : Decimal(1000.0*224.80894387096),
 }
 
 length_units = {
@@ -59,6 +72,10 @@ special_units = {
     "lb/ft" : "plf",
     "k/ft^2" : "ksf",
     "k/ft" : "klf",
+    "lb/in^2" : "psi",
+    "k/in^2" : "ksi",
+    "kN/m^2" : "kPa",
+    "MN/m^2" : "MPa",
 }
 
 
@@ -157,21 +174,24 @@ class UnitVal:
 # Base unit for length is the inch
 inches = UnitVal(value=Decimal(1.0), unitnames=["in", "lb"], power=[1, 0])
 feet = UnitVal(value=Decimal(12.0), unitnames=["ft", "lb"], power=[1, 0])
+mm = UnitVal(value=Decimal(1.0/25.4), unitnames=["mm", "N"], power=[1, 0])
+m = UnitVal(value=Decimal(1000.0*1.0/25.4), unitnames=["m", "N"], power=[1, 0])
 
 # Base unit for force is the pound
 pounds = UnitVal(value=Decimal(1.0), unitnames=["ft", "lb"], power=[0, 1])
 kips = UnitVal(value=Decimal(1000.0), unitnames=["in", "k"], power=[0, 1])
+newtons = UnitVal(value=Decimal(0.2248089), unitnames=["m", "N"], power=[0, 1])
+kilonewtons = UnitVal(value=Decimal(1000.0*0.2248089), unitnames=["m", "kN"], power=[0, 1])
+meganewtons = UnitVal(value=Decimal(1000000.0*0.2248089), unitnames=["m", "MN"], power=[0, 1])
 
 # Pressure unit is pounds and inches: psi
 psi = UnitVal(value=Decimal(1.0), unitnames=["in", "lb"], power=[-2, 1])
-ksi = UnitVal(value=Decimal(1000.0), unitnames=["k", "lb"], power=[-2, 1])
+ksi = UnitVal(value=Decimal(1000.0), unitnames=["in", "k"], power=[-2, 1])
+kilopascals = UnitVal(value=Decimal(0.1450377), unitnames=["m", "kN"], power=[-2, 1])
+megapascals = UnitVal(value=Decimal(1000.0*0.1450377), unitnames=["m", "MN"], power=[-2, 1])
 
 if __name__ == "__main__":
-    w = 1.65*kips/(1*feet)
-    L = 24.875*feet    
-    print(w)
-    print(L)
-    delta = 5*w*L*L*L*L/(384.0*29000.0*ksi*82.4*inches*inches*inches*inches)
-    print(delta)
-    delta.change_units(inches)
-    print(delta)
+    stress = 60*ksi
+    print(stress)
+    stress.change_units(megapascals)
+    print(stress)
