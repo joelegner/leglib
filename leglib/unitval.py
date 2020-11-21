@@ -50,45 +50,46 @@ import fmt
 from decimal import *
 
 DIGITS = 5
-getcontext().prec=DIGITS
+getcontext().prec = DIGITS
 
 force_units = {
-    "lb" : Decimal(1.0),
-    "k" : Decimal(1000.0),
-    "N" : Decimal(0.22480894244319),
-    "kN" : Decimal(224.80894387096),
-    "MN" : Decimal(1000.0*224.80894387096),
+    "lb": Decimal(1.0),
+    "k": Decimal(1000.0),
+    "N": Decimal(0.22480894244319),
+    "kN": Decimal(224.80894387096),
+    "MN": Decimal(1000.0*224.80894387096),
 }
 
 length_units = {
-    "in" : Decimal(1.0),
-    "ft" : Decimal(12.0),
-    "mm" : Decimal(1/25.4),
-    "m" : Decimal(1/25.4*1000.0),
+    "in": Decimal(1.0),
+    "ft": Decimal(12.0),
+    "mm": Decimal(1/25.4),
+    "m": Decimal(1/25.4*1000.0),
 }
 
 special_units = {
-    "lb/ft^2" : "psf",
-    "lb/ft" : "plf",
-    "k/ft^2" : "ksf",
-    "k/ft" : "klf",
-    "lb/in^2" : "psi",
-    "k/in^2" : "ksi",
-    "kN/m^2" : "kPa",
-    "MN/m^2" : "MPa",
+    "lb/ft^2": "psf",
+    "lb/ft": "plf",
+    "k/ft^2": "ksf",
+    "k/ft": "klf",
+    "lb/in^2": "psi",
+    "k/in^2": "ksi",
+    "kN/m^2": "kPa",
+    "MN/m^2": "MPa",
 }
 
 
 class UnitVal:
     def __init__(self, value, power, unitnames):
-        assert type(power)==list
-        assert type(value)==Decimal
+        assert type(power) == list
+        assert type(value) == Decimal
         self.value = Decimal(value)
         self.power = power
         self.unitnames = unitnames
 
     def __str__(self):
-        _val = self.value/(length_units[self.unitnames[0]]**self.power[0]*force_units[self.unitnames[1]]**self.power[1])
+        _val = self.value/(length_units[self.unitnames[0]]**self.power[0]
+                           * force_units[self.unitnames[1]]**self.power[1])
         _val = fmt.sigdig(_val, DIGITS)
         return f"{_val} {self._abbr()}"
 
@@ -108,12 +109,13 @@ class UnitVal:
             value = self.value*other.value
             power = [self.power[i] + other.power[i] for i in (0, 1)]
             unitnames = [self.unitnames[i] for i in (0, 1)]
-            
+
         elif type(other) in (float, int, Decimal):
             value = self.value*Decimal(other)
             power = self.power
         else:
-            raise ValueError(f"type(other)={type(other)} not permitted. Use float, integer, or Decimal.")
+            raise ValueError(
+                f"type(other)={type(other)} not permitted. Use float, integer, or Decimal.")
         unitnames = self.unitnames
         return UnitVal(value=value, power=power, unitnames=self.unitnames)
 
@@ -126,13 +128,13 @@ class UnitVal:
             value = self.value/Decimal(other)
             power = self.power
         else:
-            raise ValueError(f"type(other)={type(other)} not permitted. Use float, integer, or Decimal.")
+            raise ValueError(
+                f"type(other)={type(other)} not permitted. Use float, integer, or Decimal.")
         unitnames = self.unitnames
         for i in (0, 1):
-            if self.power[i] ==  i and not other.power[i] == i:
+            if self.power[i] == i and not other.power[i] == i:
                 unitnames[i] = other.unitnames[i]
         return UnitVal(value=value, power=power, unitnames=self.unitnames)
-
 
     def __rmul__(self, other):
         return self.__mul__(other)
@@ -144,7 +146,7 @@ class UnitVal:
             if self.power[0] >= 1:
                 retval = fabbr + "-" + dabbr
                 retval = special_units.get(retval, retval)
-            else: 
+            else:
                 retval = fabbr + "/" + dabbr
                 retval = special_units.get(retval, retval)
             return retval
@@ -168,7 +170,8 @@ class UnitVal:
             return self.unitnames[1]
         else:
             return f"{self.unitnames[1]}^{p}"
-        
+
+
 # Base unit for length is the inch
 inches = UnitVal(value=Decimal(1.0), unitnames=["in", "lb"], power=[1, 0])
 feet = UnitVal(value=Decimal(12.0), unitnames=["ft", "lb"], power=[1, 0])
@@ -179,12 +182,15 @@ m = UnitVal(value=Decimal(1000.0*1.0/25.4), unitnames=["m", "N"], power=[1, 0])
 pounds = UnitVal(value=Decimal(1.0), unitnames=["ft", "lb"], power=[0, 1])
 kips = UnitVal(value=Decimal(1000.0), unitnames=["in", "k"], power=[0, 1])
 newtons = UnitVal(value=Decimal(0.2248089), unitnames=["m", "N"], power=[0, 1])
-kilonewtons = UnitVal(value=Decimal(1000.0*0.2248089), unitnames=["m", "kN"], power=[0, 1])
-meganewtons = UnitVal(value=Decimal(1000000.0*0.2248089), unitnames=["m", "MN"], power=[0, 1])
+kilonewtons = UnitVal(value=Decimal(1000.0*0.2248089),
+                      unitnames=["m", "kN"], power=[0, 1])
+meganewtons = UnitVal(value=Decimal(1000000.0*0.2248089),
+                      unitnames=["m", "MN"], power=[0, 1])
 
 # Base unit for pressure unit is derived from the above as pounds per square inch, psi.
 psi = UnitVal(value=Decimal(1.0), unitnames=["in", "lb"], power=[-2, 1])
 ksi = UnitVal(value=Decimal(1000.0), unitnames=["in", "k"], power=[-2, 1])
-kilopascals = UnitVal(value=Decimal(0.1450377), unitnames=["m", "kN"], power=[-2, 1])
-megapascals = UnitVal(value=Decimal(1000.0*0.1450377), unitnames=["m", "MN"], power=[-2, 1])
-
+kilopascals = UnitVal(value=Decimal(0.1450377), unitnames=[
+                      "m", "kN"], power=[-2, 1])
+megapascals = UnitVal(value=Decimal(1000.0*0.1450377),
+                      unitnames=["m", "MN"], power=[-2, 1])

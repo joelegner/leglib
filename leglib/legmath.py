@@ -3,12 +3,13 @@
 from util import almost_equal
 import math
 
+
 def fabsmax(list_of_values):
     "Returns the maximum absolute value of a list of values."
     return max([math.fabs(i) for i in list_of_values])
 
 
-def roundsig(value, digits = 3):
+def roundsig(value, digits=3):
     """Rounds a float value to the specified number of significant digits and
     returns the rounded value"""
     if value:
@@ -21,4 +22,3 @@ def roundsig(value, digits = 3):
     else:
         fmtstr = "%.0f"
         return float("%.0f" % (round(value, places)))
-

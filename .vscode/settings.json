@@ -1,8 +1,17 @@
 {
-    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.6/bin/python3",
+    "python.pythonPath": "/Users/joelegner/.local/share/virtualenvs/leglib-SZ8nURPe/bin/python3",
     "spellright.language": [],
-    "spellright.documentTypes": ["markdown", "plaintext"],
-    "python.testing.unittestArgs": ["-v", "-s", "./tests", "-p", "test_*.py"],
+    "spellright.documentTypes": [
+        "markdown",
+        "plaintext"
+    ],
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./tests",
+        "-p",
+        "test_*.py"
+    ],
     "python.testing.pytestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": true,
@@ -10,5 +19,6 @@
         "/Users/joelegner/Development/Projects",
         "/Users/joelegner/.local/share/virtualenvs/leglib-Zug51dEN"
     ],
-    "python.venvPath": "/Users/joelegner/.local/share/virtualenvs"
+    "python.venvPath": "/Users/joelegner/.local/share/virtualenvs",
+    "editor.formatOnSave": true
 }

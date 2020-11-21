@@ -15,8 +15,11 @@ class TestLegMath(unittest.TestCase):
         # Should work with integer
         self.assertEqual(fabsmax([1, 2, 3, -4]), 4)
         # and floats
-        self.assertAlmostEqual(fabsmax([-0.0041234, 2.431, -7.542, -3.9922]), 7.542, 3)
+        self.assertAlmostEqual(
+            fabsmax([-0.0041234, 2.431, -7.542, -3.9922]), 7.542, 3)
         # and both at the same time, here with float winning
-        self.assertAlmostEqual(fabsmax([-0.0041234, 1, -7.542, -3.9922]), 7.542, 3)
+        self.assertAlmostEqual(
+            fabsmax([-0.0041234, 1, -7.542, -3.9922]), 7.542, 3)
         # and here with decimal winning
-        self.assertAlmostEqual(fabsmax([-0.0041234, 15, -7.542, -3.9922]), 15, 3)
+        self.assertAlmostEqual(
+            fabsmax([-0.0041234, 15, -7.542, -3.9922]), 15, 3)

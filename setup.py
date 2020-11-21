@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="leglib", # Replace with your own username
+    name="leglib",  # Replace with your own username
     version="0.0.4",
     author="Joe Legner",
     author_email="joelegner@gmail.com",

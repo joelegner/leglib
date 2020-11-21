@@ -7,9 +7,11 @@ import math
 
 INCHES_PER_METER = 39.3701
 
-#==============================================================================
+# ==============================================================================
 # General number formatting
-#==============================================================================
+# ==============================================================================
+
+
 def integer(value):
     "Returns float value formated to digits decimal places."
     return "%d" % (value)
@@ -19,6 +21,7 @@ def fixed(value, digits=2):
     "Returns float value formated to digits decimal places."
     fmtstr = "%%.%df" % digits
     return fmtstr % (value)
+
 
 def sigdig(value, digits=3):
     "Returns float value formatted with digits significant digits."
@@ -46,27 +49,32 @@ def money(num):
         return "$%0.2f" % num
 
 
-#==============================================================================
+# ==============================================================================
 # Force, pivot unit = kips
-#==============================================================================
+# ==============================================================================
 def lbs(kips):
     "Formats kips as pounds "
-    return "%s lbs"% (sigdig(kips*1000.0))
+    return "%s lbs" % (sigdig(kips*1000.0))
+
 
 def kN(kips):
     "Formats kips as kilonewtons "
-    return "%s kN"% (sigdig(float(kips)*4.4482))
+    return "%s kN" % (sigdig(float(kips)*4.4482))
+
 
 def kips(val):
     "Format kips as kips "
     return "%s kips" % (sigdig(val))
 
-#==============================================================================
+# ==============================================================================
 # Length, pivot unit = inches
-#==============================================================================
+# ==============================================================================
+
+
 def ft(inches):
     "Formats inches as feet "
-    return "%s ft"% (sigdig(inches/12.0))
+    return "%s ft" % (sigdig(inches/12.0))
+
 
 def ft_in(inches_in, denom=16):
     "Formats inches as feet and inches"
@@ -75,10 +83,11 @@ def ft_in(inches_in, denom=16):
     else:
         feet = math.floor(inches_in/12.0)
         if feet > 0:
-            str_feet = "%d\'-"% feet
+            str_feet = "%d\'-" % feet
         else:
             return inches(inches_in, denom)
-        return "%s%s"% (str_feet, inches(inches_in - feet*12.0, denom))
+        return "%s%s" % (str_feet, inches(inches_in - feet*12.0, denom))
+
 
 def inches(inches_in, denom=16):
     "Formats inches as inches"
@@ -90,6 +99,7 @@ def inches(inches_in, denom=16):
     else:
         return "%s\"" % frac(inches_in, denom)
 
+
 def inches_decimal(inches_in):
     "Formats inches as decimal inches up to 4 decimal places"
     if "%d" % inches_in == "%s" % inches_in:
@@ -97,70 +107,88 @@ def inches_decimal(inches_in):
     else:
         return "%.3d" % inches_in
 
+
 def m(inches_in, digits=3):
     "Formats inches as meters"
     return "%s m" % (sigdig(inches_in/INCHES_PER_METER, digits))
+
 
 def mm(inches_in, digits=3):
     "Formats inches as millimeters"
     return "%s mm" % (sigdig(inches_in/INCHES_PER_METER*1000.0, digits))
 
-#==============================================================================
+# ==============================================================================
 # Moment, pivot unit = kip-in
-#==============================================================================
+# ==============================================================================
+
+
 def kip_in(kip_inches):
     "Formats pivot unit of kip-inches"
-    return "%s kip-in"% (sigdig(kip_inches))
+    return "%s kip-in" % (sigdig(kip_inches))
+
 
 def lb_ft(kip_in):
     "Formats kip-inches as lb-ft "
-    return "%s lb-ft"% (sigdig(1000.0*kip_in/12.0))
+    return "%s lb-ft" % (sigdig(1000.0*kip_in/12.0))
+
 
 def kip_ft(kip_in):
     "Formats kip-inches as kip-ft "
-    return "%s kip-ft"% (sigdig(kip_in/12.0))
+    return "%s kip-ft" % (sigdig(kip_in/12.0))
+
 
 def kN_m(kip_in):
     "Formats kilonewton-meters as kip-ft "
-    return "%s kN-m"% (sigdig(kip_in*0.11298))
+    return "%s kN-m" % (sigdig(kip_in*0.11298))
 
-#==============================================================================
+# ==============================================================================
 # Pressure, pivot unit = kips per square inch (ksi)
-#==============================================================================
+# ==============================================================================
+
+
 def psi(ksi):
     "Formats ksi as psi "
-    return "%s psi"% (sigdig(ksi*1000.0, 3))
+    return "%s psi" % (sigdig(ksi*1000.0, 3))
+
 
 def ksi(ksi):
     "Formats ksi as ksi "
-    return "%s ksi"% (sigdig(ksi, 3))
+    return "%s ksi" % (sigdig(ksi, 3))
+
 
 def psf(ksi):
     "Formats ksi as psf "
-    return "%s psf"% (sigdig(ksi*144.0*1000.0, 3))
+    return "%s psf" % (sigdig(ksi*144.0*1000.0, 3))
+
 
 def ksf(ksi):
     "Formats ksi as ksf "
-    return "%s ksf"% (sigdig(ksi*144.0, 3))
+    return "%s ksf" % (sigdig(ksi*144.0, 3))
+
 
 def kPa(ksi):
     "Formats ksi as kilopascals "
-    return "%s kPa"% (sigdig(ksi*6894.8))
+    return "%s kPa" % (sigdig(ksi*6894.8))
 
-#==============================================================================
+# ==============================================================================
 # Line loads, pivot unit = kips per foot (k/ft)
-#==============================================================================
+# ==============================================================================
+
+
 def plf(kips_per_ft):
     " Formats kips per inch as pounds per foot "
     return "%s plf" % (sigdig(kips_per_ft*1000.0))
+
 
 def klf(kips_per_ft):
     " Formats kips per inch as kips per foot "
     return "%s k/ft" % (sigdig(kips_per_ft*12.0))
 
-#==============================================================================
+# ==============================================================================
 # Unity value = demand/capacity ratio
-#==============================================================================
+# ==============================================================================
+
+
 def unity(U):
     "Formats unity value as 2-digit number with OK or NG suffix"
     if U <= 1.0:
@@ -171,10 +199,12 @@ def unity(U):
         msg = "FAIL"
     return "%.2f %s" % (U, msg)
 
-#==============================================================================
+# ==============================================================================
 # Fractions
-#==============================================================================
-def frac(val, denom = 64):
+# ==============================================================================
+
+
+def frac(val, denom=64):
     "Formats a floating point number as a fraction"
     if val < 0:
         return "-%s" % (frac(math.fabs(val), denom))
@@ -194,15 +224,16 @@ def frac(val, denom = 64):
             numer = 0
             whole = whole + 1
         if whole and numer:
-            return "%d %d/%d"% (whole, numer, denom)
+            return "%d %d/%d" % (whole, numer, denom)
         elif numer:
-            return "%d/%d"% (numer, denom)
+            return "%d/%d" % (numer, denom)
         else:
-            return "%d"% (whole)
+            return "%d" % (whole)
 
 
 class SigdigFloat(float):
     "Used in place of a float for string formatting only.  Prints in significant digits format."
+
     def __init__(self, value, digits=3):
         self.value = value
         self.digits = digits

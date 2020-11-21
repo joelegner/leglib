@@ -80,5 +80,5 @@ class TestFormatting(unittest.TestCase):
         self.assertEqual(fmt.frac(17.0002, denom=32), "17")
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
     unittest.main()

@@ -2,17 +2,21 @@ import datetime     # for timestamp function
 import math
 import re
 
+
 def almost_equal(first, second, places=7):
     fmtstr = "%%.%df" % places
     return (fmtstr % first) == (fmtstr % second)
+
 
 def float_eq(float1, float2, prec=1.0E-6):
     "Returns true if float1 and float2 differ by less than 1E-6."
     return (math.fabs(float1 - float2) <= prec)
 
+
 def float_zero(value, prec=1.0E-6):
     "Returns True if value is very small (default < 1.0E-06)"
     return value <= prec
+
 
 def str_to_feet(value="0'-0"):
     """
@@ -64,19 +68,23 @@ def str_to_feet(value="0'-0"):
         sign = 1
     return sign*(math.fabs(whole_feet) + inches/12.0)
 
+
 def hr(width=79, char='='):
     "Returns a horizontal line of characters."
     return line(width, char)
+
 
 def datestamp():
     "Returns ISO 8601 date stamp."
     t = datetime.datetime.today()
     return t.strftime("%Y-%m-%d")
 
+
 def timestamp():
     "Returns ISO 8601 date time stamp."
     t = datetime.datetime.today()
     return t.strftime("%Y-%m-%d %H:%M")
+
 
 def line(width, char='='):
     "Returns a string composed of a number of characters repeated."
@@ -86,13 +94,13 @@ def line(width, char='='):
         retval += char
     return retval
 
-#def adir(obj):
+# def adir(obj):
 #    "Returns alphabetical dir() results."
 #    items = dir(obj)
 #    items.sort()
 #    return items
 
-#def utc_to_datetime(utc_str):
+# def utc_to_datetime(utc_str):
 #    "Parse UTC string into datetime."
 #    utc_str = utc_str.lower()
 #    utc_re = re.compile("^(?P<dayname>[a-z]{3}), (?P<day>[0-9]{2}) (?P<monthname>[a-z]{3}) (?P<year>[0-9]{4}) (?P<hour>[0-9]{2}):(?P<minute>[0-9]{2}):(?P<second>[0-9]{2}) (?P<tzoffset>[\+|\-][0-9]{4})")
@@ -105,6 +113,7 @@ def line(width, char='='):
 #    second = int(m.groupdict()["second"])
 #    return datetime.datetime(year, month, day, hour, minute, second)
 
+
 def interpolate(x1, y1, x2, y2, x):
     "Returns y for point x given line (x1, y1) - (x2, y2)."
     x = float(x)
@@ -114,7 +123,7 @@ def interpolate(x1, y1, x2, y2, x):
     y2 = float(y2)
     return (y1 + (y2 - y1)/(x2 - x1)*(x - x1))
 
-#def bilinear_interpolate(x, y, x1, y1, x2, y2, Q11, Q12, Q21, Q22):
+# def bilinear_interpolate(x, y, x1, y1, x2, y2, Q11, Q12, Q21, Q22):
 #    """Returns R which is interpolated from Q11, Q12, etc. for x, y in a
 #    square grid.  See http://en.wikipedia.org/wiki/Bilinear_interpolation"""
 #    denom = (x2 - x1)*(y2 - y1)
@@ -123,7 +132,7 @@ def interpolate(x1, y1, x2, y2, x):
 #           Q12/denom*(x2 - x)*(y - y1) + \
 #           Q22/denom*(x - x1)*(y - y1)
 
-#def geocode(address):
+# def geocode(address):
 #    "Use geopy to return (placename, lat, lon) or None if geocoding fails."
 #    from geopy import geocoders
 #    try:
@@ -135,4 +144,3 @@ def interpolate(x1, y1, x2, y2, x):
 #    except:
 #        # Could not geocode for some reason
 #        return None
-
