@@ -155,23 +155,15 @@ feet = UnitVal(value=Decimal(12.0), unitnames=["ft", "lb"], power=[1, 0])
 pounds = UnitVal(value=Decimal(1.0), unitnames=["ft", "lb"], power=[0, 1])
 kips = UnitVal(value=Decimal(1000.0), unitnames=["in", "k"], power=[0, 1])
 
+# Pressure unit is pounds and inches: psi
+psi = UnitVal(value=Decimal(1.0), unitnames=["in", "lb"], power=[-2, 1])
+ksi = UnitVal(value=Decimal(1000.0), unitnames=["k", "lb"], power=[-2, 1])
+
 if __name__ == "__main__":
-    L = 42.0*inches
-    P = 21.4*kips
-    print(L)
-    print(P)
-    print(P*L)
-    print(L*P)
-    print(L*P*0.5)
-    print(L*L)
-    B = 17.5*feet
-    A = B*L
-    Q = P/A
-    print(Q)
-    w = 4.5*kips/(18.3*feet)
+    w = 1.65*kips/(1*feet)
+    L = 24.875*feet    
     print(w)
-    L = 24.5*feet
-    W = w*L
-    print(W)
-    W.unitnames[1] = "k"
-    print(W)
+    print(L)
+    delta = 5*w*L*L*L*L/(384.0*29000.0*ksi*82.4*inches*inches*inches*inches)
+    print(delta)
+    print(inches*delta/inches)
