@@ -1,33 +1,35 @@
 """
 This module provides the UnitVal class which keeps track of units for you.
 
->>> A = 12.875*feet
->>> B = 9.5*inches
->>> C = 180.75*feet
->>> print(A)
-12.88 ft
->>> print(B)
-9.500 in
->>> print(C)
-180.8 ft
->>> print(A+B)
-13.67 ft
->>> print(C + 5.0)
-185.8 ft
->>> print(C + 15)
-195.8 ft
->>> print(15 + C)
-195.8 ft
->>> print(5*A)
-64.38 ft
->>> print(A*B)
-611.6 ft^2
->>> A=A*B
->>> print(A*A)
-33750000 ft^6
->>> L = 42*inches
+>>> L = 42.0*inches
+>>> P = 21.4*kips
 >>> print(L)
-42.00 in
+42.000 in
+>>> print(P)
+21.400 k
+>>> print(P*L)
+898.80 k-in
+>>> print(L*P)
+898800 lb-in
+>>> print(L*P*0.5)
+449400 lb-in
+>>> print(L*L)
+1764.0 in^2
+>>> B = 17.5*feet
+>>> A = B*L
+>>> Q = P/A
+>>> print(Q)
+349.39 psf
+>>> w = 4.5*kips/(18.3*feet)
+>>> print(w)
+245.90 plf
+>>> L = 24.5*feet
+>>> W = w*L
+>>> print(W)
+6024.6 lb
+>>> W.unitnames[1] = "k"
+>>> print(W)
+6.0246 k
 """
 import fmt
 from decimal import *
@@ -47,6 +49,13 @@ length_units = {
     "ft" : Decimal(12.0),
     "mm" : Decimal(1/25.4),
     "m" : Decimal(1/25.4*1000.0),
+}
+
+special_units = {
+    "lb/ft^2" : "psf",
+    "lb/ft" : "plf",
+    "k/ft^2" : "ksf",
+    "k/ft" : "klf",
 }
 
 
@@ -84,6 +93,23 @@ class UnitVal:
         unitnames = self.unitnames
         return UnitVal(value=value, power=power, unitnames=self.unitnames)
 
+    def __truediv__(self, other):
+        if isinstance(other, UnitVal):
+            # First normalize the value to inches, pounds
+            value = self.value/other.value
+            power = [self.power[i] - other.power[i] for i in (0, 1)]
+        elif type(other) in (float, int, Decimal):
+            value = self.value/Decimal(other)
+            power = self.power
+        else:
+            raise ValueError(f"type(other)={type(other)} not permitted. Use float, integer, or Decimal.")
+        unitnames = self.unitnames
+        for i in (0, 1):
+            if self.power[i] ==  i and not other.power[i] == i:
+                unitnames[i] = other.unitnames[i]
+        return UnitVal(value=value, power=power, unitnames=self.unitnames)
+
+
     def __rmul__(self, other):
         return self.__mul__(other)
 
@@ -91,12 +117,18 @@ class UnitVal:
         dabbr = self._abbr_dist()
         fabbr = self._abbr_force()
         if len(dabbr) and len(fabbr):
-            return fabbr + "-" + dabbr
+            if self.power[0] >= 1:
+                retval = fabbr + "-" + dabbr
+                retval = special_units.get(retval, retval)
+            else: 
+                retval = fabbr + "/" + dabbr
+                retval = special_units.get(retval, retval)
+            return retval
         else:
             return fabbr + dabbr
 
     def _abbr_dist(self):
-        p = self.power[0]
+        p = abs(self.power[0])
         if p == 0:
             return ""
         elif p == 1:
@@ -105,7 +137,7 @@ class UnitVal:
             return f"{self.unitnames[0]}^{p}"
 
     def _abbr_force(self):
-        p = self.power[1]
+        p = abs(self.power[1])
         if p == 0:
             return ""
         elif p == 1:
@@ -116,12 +148,12 @@ class UnitVal:
 
 
 # Base unit for length is the inch
-inches = UnitVal(value=Decimal(1.0), unitnames=("in", "lb"), power=[1, 0])
-feet = UnitVal(value=Decimal(12.0), unitnames=("ft", "lb"), power=[1, 0])
+inches = UnitVal(value=Decimal(1.0), unitnames=["in", "lb"], power=[1, 0])
+feet = UnitVal(value=Decimal(12.0), unitnames=["ft", "lb"], power=[1, 0])
 
 # Base unit for force is the pound
-pounds = UnitVal(value=Decimal(1.0), unitnames=("ft", "lb"), power=[0, 1])
-kips = UnitVal(value=Decimal(1000.0), unitnames=("in", "k"), power=[0, 1])
+pounds = UnitVal(value=Decimal(1.0), unitnames=["ft", "lb"], power=[0, 1])
+kips = UnitVal(value=Decimal(1000.0), unitnames=["in", "k"], power=[0, 1])
 
 if __name__ == "__main__":
     L = 42.0*inches
@@ -133,5 +165,13 @@ if __name__ == "__main__":
     print(L*P*0.5)
     print(L*L)
     B = 17.5*feet
-    print(B*B)
-    print((B*B).value)
+    A = B*L
+    Q = P/A
+    print(Q)
+    w = 4.5*kips/(18.3*feet)
+    print(w)
+    L = 24.5*feet
+    W = w*L
+    print(W)
+    W.unitnames[1] = "k"
+    print(W)
