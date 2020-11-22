@@ -45,6 +45,29 @@ This module provides the UnitVal class which keeps track of units for you.
 >>> stress.change_units(megapascals)
 >>> print(stress)
 413.68 MPa
+>>> # Try dividing by an integer and float
+>>> print(pressure/2)
+3447.3 kPa
+>>> print(pressure/2.0)
+3447.3 kPa
+>>> L1 = 36.5*inches
+>>> L2 = 1.75*feet
+>>> # Test addition
+>>> print(L1 + L2)
+57.500 in
+>>> print(bool(L1))
+True
+>>> print(L1 != L2)
+True
+>>> print(L1 == L2)
+False
+>>> print(L1 < L2)
+False
+>>> print(L1 > L2)
+True
+>>> L3 = 0*inches
+>>> print(bool(L3))
+False
 """
 import fmt
 from decimal import *
@@ -120,21 +143,58 @@ class UnitVal:
         return UnitVal(value=value, power=power, unitnames=self.unitnames)
 
     def __truediv__(self, other):
+        unitnames = self.unitnames
         if isinstance(other, UnitVal):
             # First normalize the value to inches, pounds
             value = self.value/other.value
             power = [self.power[i] - other.power[i] for i in (0, 1)]
+            for i in (0, 1):
+                if self.power[i] == i and not other.power[i] == i:
+                    unitnames[i] = other.unitnames[i]
         elif type(other) in (float, int, Decimal):
             value = self.value/Decimal(other)
             power = self.power
         else:
             raise ValueError(
                 f"type(other)={type(other)} not permitted. Use float, integer, or Decimal.")
+        return UnitVal(value=value, power=power, unitnames=unitnames)
+
+    def __add__(self, other):
         unitnames = self.unitnames
-        for i in (0, 1):
-            if self.power[i] == i and not other.power[i] == i:
-                unitnames[i] = other.unitnames[i]
-        return UnitVal(value=value, power=power, unitnames=self.unitnames)
+        if isinstance(other, UnitVal):
+            # First normalize the value to inches, pounds
+            assert other.power == self.power
+            return UnitVal(value=self.value+other.value, power=self.power, unitnames=self.unitnames)
+        else:
+            raise ValueError(
+                f"Addition only permitted with other UnitVal instances having compatible units.")
+
+    def __eq__(self, other):
+        if isinstance(other, UnitVal):
+            # First normalize the value to inches, pounds
+            assert other.power == self.power
+            return self.value == other.value
+        else:
+            return TypeError("Equality operator only works with two UnitVal instances")
+
+    def __neq__(self, other):
+        return not self.__eq__(other)
+
+    def __lt__(self, other):
+        if isinstance(other, UnitVal):
+            # First normalize the value to inches, pounds
+            assert other.power == self.power
+            return self.value < other.value
+        else:
+            return TypeError("Comparison operators (<, <=, ==, >=, >) only work with two UnitVal instances")
+
+    def __gt__(self, other):
+        if isinstance(other, UnitVal):
+            # First normalize the value to inches, pounds
+            assert other.power == self.power
+            return self.value > other.value
+        else:
+            return TypeError("Comparison operators (<, <=, ==, >=, >) only work with two UnitVal instances")
 
     def __rmul__(self, other):
         return self.__mul__(other)
@@ -170,6 +230,9 @@ class UnitVal:
             return self.unitnames[1]
         else:
             return f"{self.unitnames[1]}^{p}"
+
+    def __bool__(self):
+        return bool(self.value)
 
 
 # Base unit for length is the inch
