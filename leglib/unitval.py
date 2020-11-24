@@ -68,8 +68,15 @@ True
 >>> L3 = 0*inches
 >>> print(bool(L3))
 False
+>>> area = L2**2
+>>> print(area)
+3.0625 ft^2
+>>> L3 = area**(0.5)        # square root of area is length
+>>> print(L3)
+1.7500 ft
 """
 import fmt
+import math
 from decimal import *
 
 DIGITS = 5
@@ -233,6 +240,12 @@ class UnitVal:
 
     def __bool__(self):
         return bool(self.value)
+
+    def __pow__(self, other):
+        value = self.value**Decimal(other)
+        power = [int(p*other) for p in self.power]
+        unitnames = self.unitnames
+        return UnitVal(value=value, power=power, unitnames=unitnames)
 
 
 # Base unit for length is the inch
