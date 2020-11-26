@@ -78,7 +78,7 @@ False
 import fmt
 import math
 from decimal import *
-from typing import List
+from typing import List, Union, NoReturn
 
 DIGITS = 5
 getcontext().prec = DIGITS
@@ -111,30 +111,29 @@ special_units = {
 
 
 class UnitVal:
-    def __init__(self, value, power: List[int], unitnames: List[str]):
+    def __init__(self, value, power: List[int], unitnames: List[str]) -> None:
         assert type(power) == list
         assert type(value) == Decimal
         self.value = Decimal(value)
         self.power = power
         self.unitnames = unitnames
 
-    def __str__(self):
+    def __str__(self) -> str:
         _val = self.value/(length_units[self.unitnames[0]]**self.power[0]
                            * force_units[self.unitnames[1]]**self.power[1])
         _val = fmt.sigdig(_val, DIGITS)
         return f"{_val} {self._abbr()}"
 
-    def normalize(self):
+    def normalize(self) -> Decimal:
         "Return normalized value considering ratios and powers"
         lrat, lpow = length_units[self.unitnames[0]], self.power[0]
         frat, fpow = force_units[self.unitnames[1]], self.power[1]
         return self.value*(Decimal(lrat)**lpow)*(Decimal(frat)**fpow)
 
-    def change_units(self, other):
-        assert hasattr(other, "unitnames")
-        self.unitnames = tuple(other.unitnames)
+    def change_units(self, other: UnitVal) -> None:
+        self.unitnames = list(other.unitnames)
 
-    def __mul__(self, other):
+    def __mul__(self, other: Union[UnitVal, float, int, Decimal]) -> UnitVal:
         if isinstance(other, UnitVal):
             # First normalize the value to inches, pounds
             value = self.value*other.value
@@ -150,7 +149,7 @@ class UnitVal:
         unitnames = self.unitnames
         return UnitVal(value=value, power=power, unitnames=self.unitnames)
 
-    def __truediv__(self, other):
+    def __truediv__(self, other: Union[UnitVal, float, int, Decimal]) -> UnitVal:
         unitnames = self.unitnames
         if isinstance(other, UnitVal):
             # First normalize the value to inches, pounds
@@ -163,51 +162,49 @@ class UnitVal:
             value = self.value/Decimal(other)
             power = self.power
         else:
-            raise ValueError(
-                f"type(other)={type(other)} not permitted. Use float, integer, or Decimal.")
+            return NotImplemented
         return UnitVal(value=value, power=power, unitnames=unitnames)
 
-    def __add__(self, other):
+    def __add__(self, other: UnitVal) -> UnitVal:
         unitnames = self.unitnames
         if isinstance(other, UnitVal):
             # First normalize the value to inches, pounds
             assert other.power == self.power
             return UnitVal(value=self.value+other.value, power=self.power, unitnames=self.unitnames)
         else:
-            raise ValueError(
-                f"Addition only permitted with other UnitVal instances having compatible units.")
+            return NotImplemented
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         if isinstance(other, UnitVal):
             # First normalize the value to inches, pounds
             assert other.power == self.power
             return self.value == other.value
         else:
-            return TypeError("Equality operator only works with two UnitVal instances")
+            return NotImplemented
 
-    def __neq__(self, other):
+    def __neq__(self, other: object) -> bool:
         return not self.__eq__(other)
 
-    def __lt__(self, other):
+    def __lt__(self, other: object) -> bool:
         if isinstance(other, UnitVal):
             # First normalize the value to inches, pounds
             assert other.power == self.power
             return self.value < other.value
         else:
-            return TypeError("Comparison operators (<, <=, ==, >=, >) only work with two UnitVal instances")
+            return NotImplemented
 
-    def __gt__(self, other):
+    def __gt__(self, other: object) -> bool:
         if isinstance(other, UnitVal):
             # First normalize the value to inches, pounds
             assert other.power == self.power
             return self.value > other.value
         else:
-            return TypeError("Comparison operators (<, <=, ==, >=, >) only work with two UnitVal instances")
+            return NotImplemented
 
-    def __rmul__(self, other):
+    def __rmul__(self, other: Union[UnitVal, Decimal, int, float]) -> UnitVal:
         return self.__mul__(other)
 
-    def _abbr(self):
+    def _abbr(self) -> str:
         dabbr = self._abbr_dist()
         fabbr = self._abbr_force()
         if len(dabbr) and len(fabbr):
@@ -221,7 +218,7 @@ class UnitVal:
         else:
             return fabbr + dabbr
 
-    def _abbr_dist(self):
+    def _abbr_dist(self) -> str:
         p = abs(self.power[0])
         if p == 0:
             return ""
@@ -230,7 +227,7 @@ class UnitVal:
         else:
             return f"{self.unitnames[0]}^{p}"
 
-    def _abbr_force(self):
+    def _abbr_force(self) -> str:
         p = abs(self.power[1])
         if p == 0:
             return ""
@@ -239,10 +236,10 @@ class UnitVal:
         else:
             return f"{self.unitnames[1]}^{p}"
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return bool(self.value)
 
-    def __pow__(self, other):
+    def __pow__(self, other: Union[Decimal, int, float]) -> UnitVal:
         value = self.value**Decimal(other)
         power = [int(p*other) for p in self.power]
         unitnames = self.unitnames
