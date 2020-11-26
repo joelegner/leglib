@@ -78,6 +78,7 @@ False
 import fmt
 import math
 from decimal import *
+from typing import List
 
 DIGITS = 5
 getcontext().prec = DIGITS
@@ -110,7 +111,7 @@ special_units = {
 
 
 class UnitVal:
-    def __init__(self, value, power, unitnames):
+    def __init__(self, value, power: List[int], unitnames: List[str]):
         assert type(power) == list
         assert type(value) == Decimal
         self.value = Decimal(value)

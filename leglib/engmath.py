@@ -54,8 +54,3 @@ if __name__ == "__main__":
     Ab = EngVar("A_b", 0.44*inches*inches)
     print(Ab)
     print(Ab.as_latex())
-
-    # Let's try some wishful thinking
-    eq1 = Equation("(w*L**2)/8.0", r"\dfrac{w L^2}{8}"
-    eq1.as_latex()
-    eq1.as_latex_expand()
